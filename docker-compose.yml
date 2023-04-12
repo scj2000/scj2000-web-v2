@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+  scj2000-cms:
+    build: 
+      context: scj2000-cms
+      dockerfile: Dockerfile
+    container_name: scj2000-cms
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - scj2000-app-network
+    volumes:
+      - ./scj2000-cms/config:/opt/app/config
+      - ./scj2000-cms/src:/opt/app/src
+      - ./scj2000-cms/package.json:/opt/package.json
+      - ./scj2000-cms/yarn.lock:/opt/yarn.lock
+      - ./scj2000-cms/public/uploads:/opt/app/public/uploads
+    ports:
+      - "1337:1337"
+
+  scj2000-db:
+    image: postgres
+    restart: always
+    env_file: .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d scj2000 -U scj2000"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    networks:
+      - scj2000-app-network
+    volumes:
+      - ./scj2000-db/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+ 
+  scj2000-adminer:
+    image: adminer
+    restart: always
+    env_file: .env
+    networks:
+      - scj2000-app-network
+    ports:
+      - 8080:8080
+
+networks:
+  scj2000-app-network:
+    driver: bridge
