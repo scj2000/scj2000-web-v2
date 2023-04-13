@@ -1,6 +1,21 @@
 version: "3"
 
 services:
+  scj2000-web:
+    build: 
+      context: scj2000-web
+      dockerfile: Dockerfile
+    container_name: scj2000-web
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - scj2000-app-network
+    volumes:
+      - ./scj2000-web:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+
   scj2000-cms:
     build: 
       context: scj2000-cms
