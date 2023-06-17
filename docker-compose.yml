@@ -15,6 +15,19 @@ services:
       - /app/node_modules
     ports:
       - "3000:3000"
+      - "24678:24678"
+
+  scj2000-web-static:
+    image: nginx
+    container_name: scj2000-web-static
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - scj2000-app-network
+    volumes:
+      - ./scj2000-web/.output/public:/usr/share/nginx/html:ro
+    ports:
+      - "80:80"
 
   scj2000-cms:
     build: 
@@ -36,6 +49,7 @@ services:
 
   scj2000-db:
     image: postgres
+    container_name: scj2000-db
     restart: always
     env_file: .env
     healthcheck:
@@ -52,6 +66,7 @@ services:
  
   scj2000-adminer:
     image: adminer
+    container_name: scj2000-adminer
     restart: always
     env_file: .env
     networks:

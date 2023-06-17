@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "download_links",
+  "info": {
+    "singularName": "download-link",
+    "pluralName": "download-links",
+    "displayName": "Download link"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "menuLink": {
+      "type": "component",
+      "repeatable": false,
+      "component": "menu.menu-link"
+    }
+  }
+}

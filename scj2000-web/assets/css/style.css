@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: FreeHKKai;
+    src: url(/fonts/Free-HK-Kai_4700-v1.02.woff2) format("woff2");
+    unicode-range: U+4e00-9fff
+}
+
+@font-face {
+    font-family: TWKai;
+    src: url(/fonts/TW-Kai-98_1.woff2) format("woff2");
+    unicode-range: U+4e00-9fff
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.app {
+    height: 100vh;
+}
+
+.app:before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, #AAAAAA, white, #AAAAAA);
+    mix-blend-mode: color;
+    pointer-events: none;
+}
+
+.background-curtain {
+    position: fixed;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+.main {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    z-index: 0;
+}
+
+header {
+    z-index: 10;
+}
+
+main {
+    flex: auto;
+    z-index: 0;
+}
+
+footer {
+    z-index: 9;
+}

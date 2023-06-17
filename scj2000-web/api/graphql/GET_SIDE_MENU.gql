@@ -1,0 +1,32 @@
+query GET_SIDE_MENU {
+    sideMenu {
+        data {
+            attributes {
+                menuLink {
+                    menuItem {
+                        data {
+                            attributes {
+                                title
+                                url
+                                externalLink
+                                path {
+                                    data {
+                                        attributes {
+                                            article {
+                                                data {
+                                                    attributes {
+                                                        title
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                } 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

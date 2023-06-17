@@ -1,0 +1,32 @@
+query GET_TAG($id: ID!){
+    tag(id: $id) {
+        data {
+            id
+            attributes {
+                name
+                path {
+                    data {
+                        attributes {
+                            url
+                        }
+                    }
+                }
+                articleCount
+                articles {
+                    data {
+                        attributes {
+                            title
+                            path {
+                                data {
+                                    attributes {
+                                        url
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

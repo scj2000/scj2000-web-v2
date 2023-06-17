@@ -1,8 +1,8 @@
 {
-  "name": "scj-2000-cms",
+  "name": "scj2000-cms",
   "private": true,
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "description": "www.scj2000.net CMS",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
@@ -10,11 +10,11 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@_sh/strapi-plugin-ckeditor": "^2.0.4",
-    "@strapi/plugin-graphql": "^4.9.0",
-    "@strapi/plugin-i18n": "4.9.0",
-    "@strapi/plugin-users-permissions": "4.9.0",
-    "@strapi/strapi": "4.9.0",
+    "@ckeditor/strapi-plugin-ckeditor": "^0.0.7",
+    "@strapi/plugin-graphql": "^4.11.1",
+    "@strapi/plugin-i18n": "4.11.1",
+    "@strapi/plugin-users-permissions": "4.11.1",
+    "@strapi/strapi": "4.11.1",
     "better-sqlite3": "8.0.1",
     "pg": "^8.10.0"
   },

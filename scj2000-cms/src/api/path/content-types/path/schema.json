@@ -4,7 +4,8 @@
   "info": {
     "singularName": "path",
     "pluralName": "paths",
-    "displayName": "Path"
+    "displayName": "Path",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,6 +21,12 @@
       "relation": "oneToOne",
       "target": "api::article.article",
       "mappedBy": "path"
+    },
+    "tag": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tag.tag",
+      "inversedBy": "path"
     }
   }
 }

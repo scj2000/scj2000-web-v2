@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "side_menus",
+  "info": {
+    "singularName": "side-menu",
+    "pluralName": "side-menus",
+    "displayName": "Side menu",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "menuLink": {
+      "type": "component",
+      "repeatable": true,
+      "component": "menu.menu-link"
+    }
+  }
+}

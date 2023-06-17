@@ -1,0 +1,26 @@
+query GET_PATH($path: String!){
+    paths(filters: {url: {eq: $path}}) {
+        data {
+            id
+            attributes {
+                url
+                article {
+                    data {
+                        attributes {
+                            title
+                            body
+                            tags {
+                                data {
+                                    id
+                                    attributes {
+                                        name
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
