@@ -30,22 +30,23 @@ services:
       - "80:80"
 
   scj2000-cms:
-    build: 
-      context: scj2000-cms
-      dockerfile: Dockerfile
+    image: directus/directus:10
     container_name: scj2000-cms
-    restart: unless-stopped
-    env_file: .env
+    volumes:
+      - ./scj2000-db/uploads:/directus/uploads
+      - ./scj2000-db/extensions:/directus/extensions
+      # - ./scj2000-db/database:/directus/database
     networks:
       - scj2000-app-network
-    volumes:
-      - ./scj2000-cms/config:/opt/app/config
-      - ./scj2000-cms/src:/opt/app/src
-      - ./scj2000-cms/package.json:/opt/package.json
-      - ./scj2000-cms/yarn.lock:/opt/yarn.lock
-      - ./scj2000-cms/public/uploads:/opt/app/public/uploads
+    depends_on:
+      #- cache
+      - scj2000-db
+    env_file: .env
+    environment:
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: '*'
     ports:
-      - "1337:1337"
+      - 8055:8055
 
   scj2000-db:
     image: postgres
@@ -64,6 +65,14 @@ services:
     ports:
       - "5432:5432"
  
+  scj2000-redis:
+    image: redis
+    container_name: scj2000-redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - scj2000-app-network
+
   scj2000-adminer:
     image: adminer
     container_name: scj2000-adminer

@@ -1,31 +1,12 @@
 query GET_MAIN_MENU {
-    mainMenu {
-        data {
-            attributes {
-                menuLink {
-                    menuItem {
-                        data {
-                            attributes {
-                                title
-                                url
-                                externalLink
-                                path {
-                                    data {
-                                        attributes {
-                                            article {
-                                                data {
-                                                    attributes {
-                                                        title
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                } 
-                            }
-                        }
-                    }
-                }
+    mainmenu {
+        items {
+        	link: menulinks_id {
+                id
+                title
+                url
+                status
+                sort
             }
         }
     }

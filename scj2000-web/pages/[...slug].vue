@@ -20,16 +20,14 @@
 </template>
 
 <script setup lang="ts">
-    import { flatten as strapiFlatten, type StrapiResponse } from '~/api/utils/strapi'
     import GET_PATH from '~/api/graphql/GET_PATH.gql'
-    import type { GetPathQuery, Article } from '~/api/apollo'
+    import type { GetPathQuery, Articles } from '~/api/apollo'
 
     const route = useRoute()
 
     const path = '/' + [route.params.slug].flat().filter((e: any) => e).join('/')
     const { data } = await useAsyncQuery<GetPathQuery>(GET_PATH, { path })
    
-    const articleData = strapiFlatten(data?.value?.paths?.data[0].attributes?.article as StrapiResponse) as unknown as Article
-    const article = computed(() => articleData)
-    const tagId = computed(() => data?.value?.paths?.data[0].attributes?.article?.data?.attributes?.tags?.data[0].id)
+    const article = computed(() => data.value?.articles?.[0] as Articles)
+    const tagId = computed(() => data.value?.articles?.[0].tags?.[0]?.tag?.id)
 </script>

@@ -6,12 +6,10 @@
 </template>
 
 <script setup lang="ts">
-    type Article = {
-        title: string
-        body: string
-    }   
+    import type { Articles } from '~/api/apollo'
+ 
     const props = defineProps<{
-        data?: Article
+        data?: Articles
     }>()
 
     const title = computed(() => props.data?.title)

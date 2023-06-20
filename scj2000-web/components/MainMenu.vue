@@ -2,8 +2,8 @@
     <div class="pt-0">
         <nav class="flex items-center justify-between flex-wrap bg-gray-300 drop-shadow-lg mt-0 p-2 md:p-4">
             <div class="flex items-center flex-shrink-0 text-red-600 mr-6">
-                <NuxtLink to="/"><SvgInline name="scj2000" class="mr-2 text-red-600" /></NuxtLink>
-                <NuxtLink to="/"><span class="hidden sm:block font-kai text-red-600 text-2xl tracking-tight">快速倉頡中文輸入法</span></NuxtLink>
+                <AppLink to="/"><SvgInline name="scj2000" class="mr-2 text-red-600" /></AppLink>
+                <AppLink to="/"><span class="hidden sm:block font-kai text-red-600 text-2xl tracking-tight">快速倉頡中文輸入法</span></AppLink>
             </div>
             <div class="block md:hidden">
                 <button @click="showMenu = !showMenu" class="flex items-center px-3 py-2 border rounded text-red-400 border-red-400 hover:text-white hover:border-white">
@@ -20,7 +20,7 @@
                     </AppLink>
                 </div>
                 <div v-if="downloadLinkItem">
-                    <NuxtLink :to="downloadLinkItem?.url"  class="inline-block text-sm px-4 py-2 leading-none border rounded text-red-500 border-red-500 hover:border-transparent hover:text-gray-600 hover:bg-white mt-4 md:mt-0">{{ downloadLinkItem?.title }}</NuxtLink>
+                    <AppLink :to="downloadLinkItem?.url"  class="inline-block text-sm px-4 py-2 leading-none border rounded text-red-500 border-red-500 hover:border-transparent hover:text-gray-600 hover:bg-white mt-4 md:mt-0">{{ downloadLinkItem?.title }}</AppLink>
                 </div>
             </div>
         </nav>
@@ -30,13 +30,12 @@
 <script setup lang="ts">
     import GET_MAIN_MENU from '~/api/graphql/GET_MAIN_MENU.gql'
     import GET_DOWNLOAD_LINK from '~/api/graphql/GET_DOWNLOAD_LINK.gql'
-    import type { GetMainMenuQuery, GetDownloadLinkQuery } from '~/api/apollo'
+    import type { GetMainMenuQuery, GetDownloadLinkQuery, Menulinks } from '~/api/apollo'
 
     const { data: mainMenuData } = await useAsyncQuery<GetMainMenuQuery>(GET_MAIN_MENU)
-    const mainMenuItems = computed(() => mainMenuData?.value?.mainMenu?.data?.attributes?.menuLink.map((item: any) => item?.menuItem.data?.attributes))
+    const mainMenuItems = computed(() => mainMenuData?.value?.mainmenu?.items?.map((item) => item?.link as Menulinks))
 
     const { data: downloadLinkData } = await useAsyncQuery<GetDownloadLinkQuery>(GET_DOWNLOAD_LINK)
-    const downloadLinkItem = computed(() => downloadLinkData?.value?.downloadLink?.data?.attributes?.menuLink?.menuItem?.data?.attributes)
-
+    const downloadLinkItem = computed(() => downloadLinkData?.value?.downloadlink?.link as Menulinks)
     const showMenu = ref(false)
 </script>

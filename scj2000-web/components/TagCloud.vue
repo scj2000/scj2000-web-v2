@@ -21,10 +21,10 @@
 <script setup lang="ts">
     import VueWordCloud from 'vuewordcloud';
     import GET_TAGS from '~/api/graphql/GET_TAGS.gql'
-    import type { GetTagsQuery, TagEntity } from '~/api/apollo'
+    import type { GetTagsQuery, Tags } from '~/api/apollo'
 
     const { data: tagCloudData } = await useAsyncQuery<GetTagsQuery>(GET_TAGS, {pageSize: 100})
-    const tagCloudItems = computed(() => tagCloudData?.value?.tags?.data.map((item: TagEntity) => [item?.attributes?.name, item?.attributes?.articleCount]))
+    const tagCloudItems = computed(() => tagCloudData?.value?.tags?.map((item: Tags) => [item?.name, item?.articles_func?.count]))
     const itemRotationTurn = (n: number) => {
         const rotationTurn = [ 1/8, 7/8 ]
         const random = Math.floor(Math.random() * rotationTurn.length)

@@ -1,7 +1,7 @@
 import { CodegenConfig } from '@graphql-codegen/cli'
  
 const config: CodegenConfig = {
-  schema: process.env.API_ENDPOINT || "http://scj2000-cms:1337/graphql",
+  schema: process.env.API_ENDPOINT || "http://scj2000-cms:8055/graphql",
   documents: ['api/graphql/*.gql'],
   ignoreNoDocuments: true, // for better experience with the watcher
   generates: {

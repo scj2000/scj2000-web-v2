@@ -1,12 +1,12 @@
 <template>
     <NuxtLink v-if="isExternal" v-bind="$props" target="_blank" rel="noopener">
-        <slot/> 
+        <slot /> 
         <ClientOnly>
             <font-awesome-icon class="ml-1" :icon="['fas', 'arrow-up-right-from-square']" />
         </ClientOnly>
     </NuxtLink>
     <NuxtLink v-else v-bind="$props">
-        <slot/>
+        <slot />
     </NuxtLink>
 </template>
 

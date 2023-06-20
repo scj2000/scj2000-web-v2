@@ -1,31 +1,12 @@
 query GET_SIDE_MENU {
-    sideMenu {
-        data {
-            attributes {
-                menuLink {
-                    menuItem {
-                        data {
-                            attributes {
-                                title
-                                url
-                                externalLink
-                                path {
-                                    data {
-                                        attributes {
-                                            article {
-                                                data {
-                                                    attributes {
-                                                        title
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                } 
-                            }
-                        }
-                    }
-                }
+    sidemenu {
+        items {
+        	link: menulinks_id {
+                id
+                title
+                url
+                status
+                sort
             }
         }
     }

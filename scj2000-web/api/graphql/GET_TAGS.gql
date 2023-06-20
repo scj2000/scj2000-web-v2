@@ -1,18 +1,11 @@
- query GET_TAGS($pageSize: Int) {
-    tags (pagination: { page: 1, pageSize: $pageSize }) {
-        data {
-            id
-            attributes {
-                name
-                path {
-                    data {
-                        attributes {
-                        url
-                        }
-                    }
-                }
-                articleCount
-            }
+ query GET_TAGS {
+    tags (limit: 30, page: 1, sort: "-count(articles)") {
+        id
+        name
+        slug
+        status
+        articles_func {
+            count
         }
-    }
+	}
 }

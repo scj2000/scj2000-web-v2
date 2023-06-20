@@ -9,9 +9,7 @@
           </section>
       </div>
       <div class="col-span-12 my-2 lg:m-2 p-2 bg-gray-100 shadow-lg lg:col-span-9 2xl:col-span-10 lg:ml-0">
-          <template v-if="article">
-              <ArticleContent :data="article" />
-          </template>
+
       </div>
   </div>
 </template>
