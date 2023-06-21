@@ -17,7 +17,9 @@ export type Scalars = {
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
   Date: { input: any; output: any; }
+  GraphQLBigInt: { input: any; output: any; }
   GraphQLStringOrFloat: { input: any; output: any; }
+  Hash: { input: any; output: any; }
   JSON: { input: any; output: any; }
 };
 
@@ -212,6 +214,20 @@ export type Subscription = {
   __typename?: 'Subscription';
   articles_mutated?: Maybe<ArticlesMutated>;
   articles_tags_mutated?: Maybe<ArticlesTagsMutated>;
+  directus_activity_mutated?: Maybe<DirectusActivityMutated>;
+  directus_dashboards_mutated?: Maybe<DirectusDashboardsMutated>;
+  directus_files_mutated?: Maybe<DirectusFilesMutated>;
+  directus_flows_mutated?: Maybe<DirectusFlowsMutated>;
+  directus_folders_mutated?: Maybe<DirectusFoldersMutated>;
+  directus_notifications_mutated?: Maybe<DirectusNotificationsMutated>;
+  directus_panels_mutated?: Maybe<DirectusPanelsMutated>;
+  directus_permissions_mutated?: Maybe<DirectusPermissionsMutated>;
+  directus_presets_mutated?: Maybe<DirectusPresetsMutated>;
+  directus_roles_mutated?: Maybe<DirectusRolesMutated>;
+  directus_settings_mutated?: Maybe<DirectusSettingsMutated>;
+  directus_shares_mutated?: Maybe<DirectusSharesMutated>;
+  directus_translations_mutated?: Maybe<DirectusTranslationsMutated>;
+  directus_users_mutated?: Maybe<DirectusUsersMutated>;
   downloadlink_mutated?: Maybe<DownloadlinkMutated>;
   mainmenu_menulinks_mutated?: Maybe<MainmenuMenulinksMutated>;
   mainmenu_mutated?: Maybe<MainmenuMutated>;
@@ -228,6 +244,76 @@ export type SubscriptionArticlesMutatedArgs = {
 
 
 export type SubscriptionArticlesTagsMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionDirectusActivityMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionDirectusDashboardsMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionDirectusFilesMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionDirectusFlowsMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionDirectusFoldersMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionDirectusNotificationsMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionDirectusPanelsMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionDirectusPermissionsMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionDirectusPresetsMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionDirectusRolesMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionDirectusSettingsMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionDirectusSharesMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionDirectusTranslationsMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionDirectusUsersMutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
@@ -280,13 +366,33 @@ export type Articles = {
   tags?: Maybe<Array<Maybe<ArticlesTags>>>;
   tags_func?: Maybe<CountFunctions>;
   title?: Maybe<Scalars['String']['output']>;
-  user_created?: Maybe<Scalars['String']['output']>;
-  user_updated?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<DirectusUsers>;
+  user_updated?: Maybe<DirectusUsers>;
 };
 
 
 export type ArticlesTagsArgs = {
   filter?: InputMaybe<ArticlesTagsFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ArticlesUserCreatedArgs = {
+  filter?: InputMaybe<DirectusUsersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ArticlesUserUpdatedArgs = {
+  filter?: InputMaybe<DirectusUsersFilter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -343,8 +449,8 @@ export type ArticlesFilter = {
   tags?: InputMaybe<ArticlesTagsFilter>;
   tags_func?: InputMaybe<CountFunctionFilterOperators>;
   title?: InputMaybe<StringFilterOperators>;
-  user_created?: InputMaybe<StringFilterOperators>;
-  user_updated?: InputMaybe<StringFilterOperators>;
+  user_created?: InputMaybe<DirectusUsersFilter>;
+  user_updated?: InputMaybe<DirectusUsersFilter>;
 };
 
 export type ArticlesMutated = {
@@ -422,6 +528,13 @@ export type ArticlesTagsMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type BooleanFilterOperators = {
+  _eq?: InputMaybe<Scalars['Boolean']['input']>;
+  _neq?: InputMaybe<Scalars['Boolean']['input']>;
+  _nnull?: InputMaybe<Scalars['Boolean']['input']>;
+  _null?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type CountFunctionFilterOperators = {
   count?: InputMaybe<NumberFilterOperators>;
 };
@@ -469,6 +582,703 @@ export type DatetimeFunctions = {
   year?: Maybe<Scalars['Int']['output']>;
 };
 
+export type DirectusActivity = {
+  __typename?: 'directus_activity';
+  action: Scalars['String']['output'];
+  collection: Scalars['String']['output'];
+  comment?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  ip?: Maybe<Scalars['String']['output']>;
+  item: Scalars['String']['output'];
+  origin?: Maybe<Scalars['String']['output']>;
+  timestamp?: Maybe<Scalars['Date']['output']>;
+  timestamp_func?: Maybe<DatetimeFunctions>;
+  user?: Maybe<DirectusUsers>;
+  user_agent?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type DirectusActivityUserArgs = {
+  filter?: InputMaybe<DirectusUsersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DirectusActivityMutated = {
+  __typename?: 'directus_activity_mutated';
+  data?: Maybe<DirectusActivity>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type DirectusDashboards = {
+  __typename?: 'directus_dashboards';
+  color?: Maybe<Scalars['String']['output']>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<DatetimeFunctions>;
+  icon?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  note?: Maybe<Scalars['String']['output']>;
+  panels?: Maybe<Array<Maybe<DirectusPanels>>>;
+  panels_func?: Maybe<CountFunctions>;
+  user_created?: Maybe<DirectusUsers>;
+};
+
+
+export type DirectusDashboardsPanelsArgs = {
+  filter?: InputMaybe<DirectusPanelsFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type DirectusDashboardsUserCreatedArgs = {
+  filter?: InputMaybe<DirectusUsersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DirectusDashboardsFilter = {
+  _and?: InputMaybe<Array<InputMaybe<DirectusDashboardsFilter>>>;
+  _or?: InputMaybe<Array<InputMaybe<DirectusDashboardsFilter>>>;
+  color?: InputMaybe<StringFilterOperators>;
+  date_created?: InputMaybe<DateFilterOperators>;
+  date_created_func?: InputMaybe<DatetimeFunctionFilterOperators>;
+  icon?: InputMaybe<StringFilterOperators>;
+  id?: InputMaybe<StringFilterOperators>;
+  name?: InputMaybe<StringFilterOperators>;
+  note?: InputMaybe<StringFilterOperators>;
+  panels?: InputMaybe<DirectusPanelsFilter>;
+  panels_func?: InputMaybe<CountFunctionFilterOperators>;
+  user_created?: InputMaybe<DirectusUsersFilter>;
+};
+
+export type DirectusDashboardsMutated = {
+  __typename?: 'directus_dashboards_mutated';
+  data?: Maybe<DirectusDashboards>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type DirectusFiles = {
+  __typename?: 'directus_files';
+  charset?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  duration?: Maybe<Scalars['Int']['output']>;
+  embed?: Maybe<Scalars['String']['output']>;
+  filename_disk?: Maybe<Scalars['String']['output']>;
+  filename_download: Scalars['String']['output'];
+  filesize?: Maybe<Scalars['GraphQLBigInt']['output']>;
+  folder?: Maybe<DirectusFolders>;
+  height?: Maybe<Scalars['Int']['output']>;
+  id: Scalars['ID']['output'];
+  location?: Maybe<Scalars['String']['output']>;
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  metadata_func?: Maybe<CountFunctions>;
+  modified_by?: Maybe<DirectusUsers>;
+  modified_on?: Maybe<Scalars['Date']['output']>;
+  modified_on_func?: Maybe<DatetimeFunctions>;
+  storage: Scalars['String']['output'];
+  tags?: Maybe<Scalars['JSON']['output']>;
+  tags_func?: Maybe<CountFunctions>;
+  title?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+  uploaded_by?: Maybe<DirectusUsers>;
+  uploaded_on?: Maybe<Scalars['Date']['output']>;
+  uploaded_on_func?: Maybe<DatetimeFunctions>;
+  width?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type DirectusFilesFolderArgs = {
+  filter?: InputMaybe<DirectusFoldersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type DirectusFilesModifiedByArgs = {
+  filter?: InputMaybe<DirectusUsersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type DirectusFilesUploadedByArgs = {
+  filter?: InputMaybe<DirectusUsersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DirectusFilesFilter = {
+  _and?: InputMaybe<Array<InputMaybe<DirectusFilesFilter>>>;
+  _or?: InputMaybe<Array<InputMaybe<DirectusFilesFilter>>>;
+  charset?: InputMaybe<StringFilterOperators>;
+  description?: InputMaybe<StringFilterOperators>;
+  duration?: InputMaybe<NumberFilterOperators>;
+  embed?: InputMaybe<StringFilterOperators>;
+  filename_disk?: InputMaybe<StringFilterOperators>;
+  filename_download?: InputMaybe<StringFilterOperators>;
+  filesize?: InputMaybe<NumberFilterOperators>;
+  folder?: InputMaybe<DirectusFoldersFilter>;
+  height?: InputMaybe<NumberFilterOperators>;
+  id?: InputMaybe<StringFilterOperators>;
+  location?: InputMaybe<StringFilterOperators>;
+  metadata?: InputMaybe<StringFilterOperators>;
+  metadata_func?: InputMaybe<CountFunctionFilterOperators>;
+  modified_by?: InputMaybe<DirectusUsersFilter>;
+  modified_on?: InputMaybe<DateFilterOperators>;
+  modified_on_func?: InputMaybe<DatetimeFunctionFilterOperators>;
+  storage?: InputMaybe<StringFilterOperators>;
+  tags?: InputMaybe<StringFilterOperators>;
+  tags_func?: InputMaybe<CountFunctionFilterOperators>;
+  title?: InputMaybe<StringFilterOperators>;
+  type?: InputMaybe<StringFilterOperators>;
+  uploaded_by?: InputMaybe<DirectusUsersFilter>;
+  uploaded_on?: InputMaybe<DateFilterOperators>;
+  uploaded_on_func?: InputMaybe<DatetimeFunctionFilterOperators>;
+  width?: InputMaybe<NumberFilterOperators>;
+};
+
+export type DirectusFilesMutated = {
+  __typename?: 'directus_files_mutated';
+  data?: Maybe<DirectusFiles>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type DirectusFlows = {
+  __typename?: 'directus_flows';
+  color?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  options?: Maybe<Scalars['JSON']['output']>;
+  options_func?: Maybe<CountFunctions>;
+  trigger?: Maybe<Scalars['String']['output']>;
+};
+
+export type DirectusFlowsMutated = {
+  __typename?: 'directus_flows_mutated';
+  data?: Maybe<DirectusFlows>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type DirectusFolders = {
+  __typename?: 'directus_folders';
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  parent?: Maybe<DirectusFolders>;
+};
+
+
+export type DirectusFoldersParentArgs = {
+  filter?: InputMaybe<DirectusFoldersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DirectusFoldersFilter = {
+  _and?: InputMaybe<Array<InputMaybe<DirectusFoldersFilter>>>;
+  _or?: InputMaybe<Array<InputMaybe<DirectusFoldersFilter>>>;
+  id?: InputMaybe<StringFilterOperators>;
+  name?: InputMaybe<StringFilterOperators>;
+  parent?: InputMaybe<DirectusFoldersFilter>;
+};
+
+export type DirectusFoldersMutated = {
+  __typename?: 'directus_folders_mutated';
+  data?: Maybe<DirectusFolders>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type DirectusNotifications = {
+  __typename?: 'directus_notifications';
+  collection?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  item?: Maybe<Scalars['String']['output']>;
+  message?: Maybe<Scalars['String']['output']>;
+  recipient?: Maybe<DirectusUsers>;
+  sender?: Maybe<DirectusUsers>;
+  status?: Maybe<Scalars['String']['output']>;
+  subject: Scalars['String']['output'];
+  timestamp?: Maybe<Scalars['Date']['output']>;
+  timestamp_func?: Maybe<DatetimeFunctions>;
+};
+
+
+export type DirectusNotificationsRecipientArgs = {
+  filter?: InputMaybe<DirectusUsersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type DirectusNotificationsSenderArgs = {
+  filter?: InputMaybe<DirectusUsersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DirectusNotificationsMutated = {
+  __typename?: 'directus_notifications_mutated';
+  data?: Maybe<DirectusNotifications>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type DirectusPanels = {
+  __typename?: 'directus_panels';
+  color?: Maybe<Scalars['String']['output']>;
+  dashboard?: Maybe<DirectusDashboards>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<DatetimeFunctions>;
+  height: Scalars['Int']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  name?: Maybe<Scalars['String']['output']>;
+  note?: Maybe<Scalars['String']['output']>;
+  options?: Maybe<Scalars['JSON']['output']>;
+  options_func?: Maybe<CountFunctions>;
+  position_x: Scalars['Int']['output'];
+  position_y: Scalars['Int']['output'];
+  show_header: Scalars['Boolean']['output'];
+  type: Scalars['String']['output'];
+  user_created?: Maybe<DirectusUsers>;
+  width: Scalars['Int']['output'];
+};
+
+
+export type DirectusPanelsDashboardArgs = {
+  filter?: InputMaybe<DirectusDashboardsFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type DirectusPanelsUserCreatedArgs = {
+  filter?: InputMaybe<DirectusUsersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DirectusPanelsFilter = {
+  _and?: InputMaybe<Array<InputMaybe<DirectusPanelsFilter>>>;
+  _or?: InputMaybe<Array<InputMaybe<DirectusPanelsFilter>>>;
+  color?: InputMaybe<StringFilterOperators>;
+  dashboard?: InputMaybe<DirectusDashboardsFilter>;
+  date_created?: InputMaybe<DateFilterOperators>;
+  date_created_func?: InputMaybe<DatetimeFunctionFilterOperators>;
+  height?: InputMaybe<NumberFilterOperators>;
+  icon?: InputMaybe<StringFilterOperators>;
+  id?: InputMaybe<StringFilterOperators>;
+  name?: InputMaybe<StringFilterOperators>;
+  note?: InputMaybe<StringFilterOperators>;
+  options?: InputMaybe<StringFilterOperators>;
+  options_func?: InputMaybe<CountFunctionFilterOperators>;
+  position_x?: InputMaybe<NumberFilterOperators>;
+  position_y?: InputMaybe<NumberFilterOperators>;
+  show_header?: InputMaybe<BooleanFilterOperators>;
+  type?: InputMaybe<StringFilterOperators>;
+  user_created?: InputMaybe<DirectusUsersFilter>;
+  width?: InputMaybe<NumberFilterOperators>;
+};
+
+export type DirectusPanelsMutated = {
+  __typename?: 'directus_panels_mutated';
+  data?: Maybe<DirectusPanels>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type DirectusPermissions = {
+  __typename?: 'directus_permissions';
+  action: Scalars['String']['output'];
+  collection: Scalars['String']['output'];
+  fields?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  id: Scalars['ID']['output'];
+  permissions?: Maybe<Scalars['JSON']['output']>;
+  permissions_func?: Maybe<CountFunctions>;
+  presets?: Maybe<Scalars['JSON']['output']>;
+  presets_func?: Maybe<CountFunctions>;
+  role?: Maybe<DirectusRoles>;
+  validation?: Maybe<Scalars['JSON']['output']>;
+  validation_func?: Maybe<CountFunctions>;
+};
+
+
+export type DirectusPermissionsRoleArgs = {
+  filter?: InputMaybe<DirectusRolesFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DirectusPermissionsMutated = {
+  __typename?: 'directus_permissions_mutated';
+  data?: Maybe<DirectusPermissions>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type DirectusPresets = {
+  __typename?: 'directus_presets';
+  bookmark?: Maybe<Scalars['String']['output']>;
+  collection?: Maybe<Scalars['String']['output']>;
+  color?: Maybe<Scalars['String']['output']>;
+  filter?: Maybe<Scalars['JSON']['output']>;
+  filter_func?: Maybe<CountFunctions>;
+  icon?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  layout?: Maybe<Scalars['String']['output']>;
+  layout_options?: Maybe<Scalars['JSON']['output']>;
+  layout_options_func?: Maybe<CountFunctions>;
+  layout_query?: Maybe<Scalars['JSON']['output']>;
+  layout_query_func?: Maybe<CountFunctions>;
+  refresh_interval?: Maybe<Scalars['Int']['output']>;
+  role?: Maybe<DirectusRoles>;
+  search?: Maybe<Scalars['String']['output']>;
+  user?: Maybe<DirectusUsers>;
+};
+
+
+export type DirectusPresetsRoleArgs = {
+  filter?: InputMaybe<DirectusRolesFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type DirectusPresetsUserArgs = {
+  filter?: InputMaybe<DirectusUsersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DirectusPresetsMutated = {
+  __typename?: 'directus_presets_mutated';
+  data?: Maybe<DirectusPresets>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type DirectusRoles = {
+  __typename?: 'directus_roles';
+  admin_access: Scalars['Boolean']['output'];
+  app_access?: Maybe<Scalars['Boolean']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  enforce_tfa: Scalars['Boolean']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  ip_access?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  name: Scalars['String']['output'];
+  users?: Maybe<Array<Maybe<DirectusUsers>>>;
+  users_func?: Maybe<CountFunctions>;
+};
+
+
+export type DirectusRolesUsersArgs = {
+  filter?: InputMaybe<DirectusUsersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DirectusRolesFilter = {
+  _and?: InputMaybe<Array<InputMaybe<DirectusRolesFilter>>>;
+  _or?: InputMaybe<Array<InputMaybe<DirectusRolesFilter>>>;
+  admin_access?: InputMaybe<BooleanFilterOperators>;
+  app_access?: InputMaybe<BooleanFilterOperators>;
+  description?: InputMaybe<StringFilterOperators>;
+  enforce_tfa?: InputMaybe<BooleanFilterOperators>;
+  icon?: InputMaybe<StringFilterOperators>;
+  id?: InputMaybe<StringFilterOperators>;
+  ip_access?: InputMaybe<StringFilterOperators>;
+  name?: InputMaybe<StringFilterOperators>;
+  users?: InputMaybe<DirectusUsersFilter>;
+  users_func?: InputMaybe<CountFunctionFilterOperators>;
+};
+
+export type DirectusRolesMutated = {
+  __typename?: 'directus_roles_mutated';
+  data?: Maybe<DirectusRoles>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type DirectusSettings = {
+  __typename?: 'directus_settings';
+  auth_login_attempts?: Maybe<Scalars['Int']['output']>;
+  auth_password_policy?: Maybe<Scalars['String']['output']>;
+  basemaps?: Maybe<Scalars['JSON']['output']>;
+  basemaps_func?: Maybe<CountFunctions>;
+  custom_aspect_ratios?: Maybe<Scalars['JSON']['output']>;
+  custom_aspect_ratios_func?: Maybe<CountFunctions>;
+  custom_css?: Maybe<Scalars['String']['output']>;
+  default_language?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  mapbox_key?: Maybe<Scalars['String']['output']>;
+  module_bar?: Maybe<Scalars['JSON']['output']>;
+  module_bar_func?: Maybe<CountFunctions>;
+  /** $t:field_options.directus_settings.project_color_note */
+  project_color?: Maybe<Scalars['String']['output']>;
+  project_descriptor?: Maybe<Scalars['String']['output']>;
+  project_logo?: Maybe<DirectusFiles>;
+  project_name?: Maybe<Scalars['String']['output']>;
+  project_url?: Maybe<Scalars['String']['output']>;
+  public_background?: Maybe<DirectusFiles>;
+  public_foreground?: Maybe<DirectusFiles>;
+  public_note?: Maybe<Scalars['String']['output']>;
+  storage_asset_presets?: Maybe<Scalars['JSON']['output']>;
+  storage_asset_presets_func?: Maybe<CountFunctions>;
+  storage_asset_transform?: Maybe<Scalars['String']['output']>;
+  storage_default_folder?: Maybe<DirectusFolders>;
+};
+
+
+export type DirectusSettingsProjectLogoArgs = {
+  filter?: InputMaybe<DirectusFilesFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type DirectusSettingsPublicBackgroundArgs = {
+  filter?: InputMaybe<DirectusFilesFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type DirectusSettingsPublicForegroundArgs = {
+  filter?: InputMaybe<DirectusFilesFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type DirectusSettingsStorageDefaultFolderArgs = {
+  filter?: InputMaybe<DirectusFoldersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DirectusSettingsMutated = {
+  __typename?: 'directus_settings_mutated';
+  data?: Maybe<DirectusSettings>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type DirectusShares = {
+  __typename?: 'directus_shares';
+  collection?: Maybe<Scalars['String']['output']>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<DatetimeFunctions>;
+  /** $t:shared_leave_blank_for_unlimited */
+  date_end?: Maybe<Scalars['Date']['output']>;
+  date_end_func?: Maybe<DatetimeFunctions>;
+  /** $t:shared_leave_blank_for_unlimited */
+  date_start?: Maybe<Scalars['Date']['output']>;
+  date_start_func?: Maybe<DatetimeFunctions>;
+  id: Scalars['ID']['output'];
+  item?: Maybe<Scalars['String']['output']>;
+  /** $t:shared_leave_blank_for_unlimited */
+  max_uses?: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  /** $t:shared_leave_blank_for_unlimited */
+  password?: Maybe<Scalars['Hash']['output']>;
+  role?: Maybe<DirectusRoles>;
+  times_used?: Maybe<Scalars['Int']['output']>;
+  user_created?: Maybe<DirectusUsers>;
+};
+
+
+export type DirectusSharesRoleArgs = {
+  filter?: InputMaybe<DirectusRolesFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type DirectusSharesUserCreatedArgs = {
+  filter?: InputMaybe<DirectusUsersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DirectusSharesMutated = {
+  __typename?: 'directus_shares_mutated';
+  data?: Maybe<DirectusShares>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type DirectusTranslations = {
+  __typename?: 'directus_translations';
+  id: Scalars['ID']['output'];
+  key: Scalars['String']['output'];
+  language: Scalars['String']['output'];
+  value: Scalars['String']['output'];
+};
+
+export type DirectusTranslationsMutated = {
+  __typename?: 'directus_translations_mutated';
+  data?: Maybe<DirectusTranslations>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type DirectusUsers = {
+  __typename?: 'directus_users';
+  auth_data?: Maybe<Scalars['JSON']['output']>;
+  auth_data_func?: Maybe<CountFunctions>;
+  avatar?: Maybe<DirectusFiles>;
+  description?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  email_notifications?: Maybe<Scalars['Boolean']['output']>;
+  external_identifier?: Maybe<Scalars['String']['output']>;
+  first_name?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  language?: Maybe<Scalars['String']['output']>;
+  last_access?: Maybe<Scalars['Date']['output']>;
+  last_access_func?: Maybe<DatetimeFunctions>;
+  last_name?: Maybe<Scalars['String']['output']>;
+  last_page?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<Scalars['String']['output']>;
+  password?: Maybe<Scalars['Hash']['output']>;
+  provider?: Maybe<Scalars['String']['output']>;
+  role?: Maybe<DirectusRoles>;
+  status?: Maybe<Scalars['String']['output']>;
+  tags?: Maybe<Scalars['JSON']['output']>;
+  tags_func?: Maybe<CountFunctions>;
+  tfa_secret?: Maybe<Scalars['Hash']['output']>;
+  theme?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  token?: Maybe<Scalars['Hash']['output']>;
+};
+
+
+export type DirectusUsersAvatarArgs = {
+  filter?: InputMaybe<DirectusFilesFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type DirectusUsersRoleArgs = {
+  filter?: InputMaybe<DirectusRolesFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type DirectusUsersFilter = {
+  _and?: InputMaybe<Array<InputMaybe<DirectusUsersFilter>>>;
+  _or?: InputMaybe<Array<InputMaybe<DirectusUsersFilter>>>;
+  auth_data?: InputMaybe<StringFilterOperators>;
+  auth_data_func?: InputMaybe<CountFunctionFilterOperators>;
+  avatar?: InputMaybe<DirectusFilesFilter>;
+  description?: InputMaybe<StringFilterOperators>;
+  email?: InputMaybe<StringFilterOperators>;
+  email_notifications?: InputMaybe<BooleanFilterOperators>;
+  external_identifier?: InputMaybe<StringFilterOperators>;
+  first_name?: InputMaybe<StringFilterOperators>;
+  id?: InputMaybe<StringFilterOperators>;
+  language?: InputMaybe<StringFilterOperators>;
+  last_access?: InputMaybe<DateFilterOperators>;
+  last_access_func?: InputMaybe<DatetimeFunctionFilterOperators>;
+  last_name?: InputMaybe<StringFilterOperators>;
+  last_page?: InputMaybe<StringFilterOperators>;
+  location?: InputMaybe<StringFilterOperators>;
+  password?: InputMaybe<HashFilterOperators>;
+  provider?: InputMaybe<StringFilterOperators>;
+  role?: InputMaybe<DirectusRolesFilter>;
+  status?: InputMaybe<StringFilterOperators>;
+  tags?: InputMaybe<StringFilterOperators>;
+  tags_func?: InputMaybe<CountFunctionFilterOperators>;
+  tfa_secret?: InputMaybe<HashFilterOperators>;
+  theme?: InputMaybe<StringFilterOperators>;
+  title?: InputMaybe<StringFilterOperators>;
+  token?: InputMaybe<HashFilterOperators>;
+};
+
+export type DirectusUsersMutated = {
+  __typename?: 'directus_users_mutated';
+  data?: Maybe<DirectusUsers>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
 export type Downloadlink = {
   __typename?: 'downloadlink';
   id: Scalars['ID']['output'];
@@ -490,6 +1300,13 @@ export type DownloadlinkMutated = {
   data?: Maybe<Downloadlink>;
   event?: Maybe<EventEnum>;
   key: Scalars['ID']['output'];
+};
+
+export type HashFilterOperators = {
+  _empty?: InputMaybe<Scalars['Boolean']['input']>;
+  _nempty?: InputMaybe<Scalars['Boolean']['input']>;
+  _nnull?: InputMaybe<Scalars['Boolean']['input']>;
+  _null?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type Mainmenu = {

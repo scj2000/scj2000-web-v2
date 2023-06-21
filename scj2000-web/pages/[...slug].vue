@@ -29,5 +29,5 @@
     const { data } = await useAsyncQuery<GetPathQuery>(GET_PATH, { path })
    
     const article = computed(() => data.value?.articles?.[0] as Articles)
-    const tagId = computed(() => data.value?.articles?.[0].tags?.[0]?.tag?.id)
+    const tagId = computed(() => data.value?.articles?.[0]?.tags?.[0]?.tag?.id)
 </script>
