@@ -10,5 +10,5 @@ docker-compose up -d
 ## Generate static site
 
 ```bash
-docker-compose run scj2000-web npm run regenerate
+docker-compose exec scj2000-web npm run regenerate
 ```
