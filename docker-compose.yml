@@ -11,8 +11,8 @@ services:
     networks:
       - scj2000-app-network
     volumes:
-      - ./scj2000-web:/app
-      - /app/node_modules
+      - ./scj2000-web:/frontend
+      - /frontend/node_modules
     ports:
       - "3000:3000"
       - "24678:24678"
@@ -33,9 +33,10 @@ services:
     image: directus/directus:10
     container_name: scj2000-cms
     volumes:
-      - ./scj2000-db/uploads:/directus/uploads
-      - ./scj2000-db/extensions:/directus/extensions
-      # - ./scj2000-db/database:/directus/database
+      - ./scj2000-cms/schema:/directus/schema
+      - ./scj2000-cms/uploads:/directus/uploads
+      - ./scj2000-cms/extensions:/directus/extensions
+      # - ./scj2000-cms/database:/directus/database
     networks:
       - scj2000-app-network
     depends_on:

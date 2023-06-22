@@ -1,8 +1,8 @@
 FROM node:16-bullseye
 
-WORKDIR /app
+WORKDIR /frontend
 RUN apt-get update && apt-get install git -y
-COPY ./package*.json /app/
+COPY ./package*.json /frontend/
 RUN npm install && npm cache clean --force
 COPY . .
 ENV PATH ./node_modules/.bin/:$PATH
