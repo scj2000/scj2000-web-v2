@@ -12,6 +12,10 @@ export default defineNuxtConfig({
         API_TOKEN: process.env.API_TOKEN,
         public: {
             API_ENDPOINT: process.env.API_ENDPOINT,
+            siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.scj2000.net',
+            siteName: '快倉中文輸入法',
+            siteDescription: '歡迎來到快倉中文輸入法網站！',
+            language: 'zh-Hant',
         }
     },
     app: {
@@ -58,6 +62,9 @@ export default defineNuxtConfig({
                 fallbackBreakpoint: 'lg'
             },
         ],
+    ],
+    extends: [
+        'nuxt-seo-kit'
     ],
     apollo: {
         authType: "Bearer",
