@@ -4,9 +4,34 @@ query GET_PATH($path: String!){
         title
         body
         tags {
-            tag: tags_id {
+            tags_id {
                 id
                 name
+                slug
+            }
+        }
+	}
+    tags (filter: {slug: {_eq: $path}}) {
+        id
+        name
+        slug
+        status
+        articles {
+            articles_id {
+                id
+                title
+                cover_image {
+                    id
+                    folder {
+                        name
+                    }
+                    filename_disk
+                    filename_download
+                    type
+                    description
+                    filesize
+                }
+                summary
                 slug
             }
         }

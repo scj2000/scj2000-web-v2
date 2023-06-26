@@ -11,7 +11,7 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
 export type ReactiveFunction<TParam> = () => TParam;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string | number; output: string; }
+  ID: { input: string; output: string; }
   String: { input: string; output: string; }
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
@@ -34,10 +34,14 @@ export type Query = {
   articles: Array<Articles>;
   articles_aggregated: Array<ArticlesAggregated>;
   articles_by_id?: Maybe<Articles>;
+  articles_files: Array<ArticlesFiles>;
+  articles_files_aggregated: Array<ArticlesFilesAggregated>;
+  articles_files_by_id?: Maybe<ArticlesFiles>;
   articles_tags: Array<ArticlesTags>;
   articles_tags_aggregated: Array<ArticlesTagsAggregated>;
   articles_tags_by_id?: Maybe<ArticlesTags>;
   downloadlink?: Maybe<Downloadlink>;
+  frontpage?: Maybe<Frontpage>;
   mainmenu?: Maybe<Mainmenu>;
   mainmenu_menulinks: Array<MainmenuMenulinks>;
   mainmenu_menulinks_aggregated: Array<MainmenuMenulinksAggregated>;
@@ -52,6 +56,9 @@ export type Query = {
   tags: Array<Tags>;
   tags_aggregated: Array<TagsAggregated>;
   tags_by_id?: Maybe<Tags>;
+  user_feedbacks: Array<UserFeedbacks>;
+  user_feedbacks_aggregated: Array<UserFeedbacksAggregated>;
+  user_feedbacks_by_id?: Maybe<UserFeedbacks>;
 };
 
 
@@ -77,6 +84,32 @@ export type QueryArticlesAggregatedArgs = {
 
 
 export type QueryArticlesByIdArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryArticlesFilesArgs = {
+  filter?: InputMaybe<ArticlesFilesFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryArticlesFilesAggregatedArgs = {
+  filter?: InputMaybe<ArticlesFilesFilter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryArticlesFilesByIdArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -210,8 +243,35 @@ export type QueryTagsByIdArgs = {
   id: Scalars['ID']['input'];
 };
 
+
+export type QueryUserFeedbacksArgs = {
+  filter?: InputMaybe<UserFeedbacksFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryUserFeedbacksAggregatedArgs = {
+  filter?: InputMaybe<UserFeedbacksFilter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryUserFeedbacksByIdArgs = {
+  id: Scalars['ID']['input'];
+};
+
 export type Subscription = {
   __typename?: 'Subscription';
+  articles_files_mutated?: Maybe<ArticlesFilesMutated>;
   articles_mutated?: Maybe<ArticlesMutated>;
   articles_tags_mutated?: Maybe<ArticlesTagsMutated>;
   directus_activity_mutated?: Maybe<DirectusActivityMutated>;
@@ -229,12 +289,19 @@ export type Subscription = {
   directus_translations_mutated?: Maybe<DirectusTranslationsMutated>;
   directus_users_mutated?: Maybe<DirectusUsersMutated>;
   downloadlink_mutated?: Maybe<DownloadlinkMutated>;
+  frontpage_mutated?: Maybe<FrontpageMutated>;
   mainmenu_menulinks_mutated?: Maybe<MainmenuMenulinksMutated>;
   mainmenu_mutated?: Maybe<MainmenuMutated>;
   menulinks_mutated?: Maybe<MenulinksMutated>;
   sidemenu_menulinks_mutated?: Maybe<SidemenuMenulinksMutated>;
   sidemenu_mutated?: Maybe<SidemenuMutated>;
   tags_mutated?: Maybe<TagsMutated>;
+  user_feedbacks_mutated?: Maybe<UserFeedbacksMutated>;
+};
+
+
+export type SubscriptionArticlesFilesMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
 };
 
 
@@ -323,6 +390,11 @@ export type SubscriptionDownloadlinkMutatedArgs = {
 };
 
 
+export type SubscriptionFrontpageMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
 export type SubscriptionMainmenuMenulinksMutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
@@ -352,22 +424,62 @@ export type SubscriptionTagsMutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
+
+export type SubscriptionUserFeedbacksMutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
 export type Articles = {
   __typename?: 'articles';
   body?: Maybe<Scalars['String']['output']>;
+  cover_image?: Maybe<DirectusFiles>;
   date_created?: Maybe<Scalars['Date']['output']>;
   date_created_func?: Maybe<DatetimeFunctions>;
   date_updated?: Maybe<Scalars['Date']['output']>;
   date_updated_func?: Maybe<DatetimeFunctions>;
+  files?: Maybe<Array<Maybe<ArticlesFiles>>>;
+  files_func?: Maybe<CountFunctions>;
+  frontpage_articles?: Maybe<Frontpage>;
   id: Scalars['ID']['output'];
   slug: Scalars['String']['output'];
   sort?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['String']['output']>;
+  summary?: Maybe<Scalars['String']['output']>;
   tags?: Maybe<Array<Maybe<ArticlesTags>>>;
   tags_func?: Maybe<CountFunctions>;
   title?: Maybe<Scalars['String']['output']>;
   user_created?: Maybe<DirectusUsers>;
   user_updated?: Maybe<DirectusUsers>;
+};
+
+
+export type ArticlesCoverImageArgs = {
+  filter?: InputMaybe<DirectusFilesFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ArticlesFilesArgs = {
+  filter?: InputMaybe<ArticlesFilesFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ArticlesFrontpageArticlesArgs = {
+  filter?: InputMaybe<FrontpageFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
@@ -417,12 +529,16 @@ export type ArticlesAggregated = {
 export type ArticlesAggregatedCount = {
   __typename?: 'articles_aggregated_count';
   body?: Maybe<Scalars['Int']['output']>;
+  cover_image?: Maybe<Scalars['Int']['output']>;
   date_created?: Maybe<Scalars['Int']['output']>;
   date_updated?: Maybe<Scalars['Int']['output']>;
+  files?: Maybe<Scalars['Int']['output']>;
+  frontpage_articles?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   slug?: Maybe<Scalars['Int']['output']>;
   sort?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['Int']['output']>;
+  summary?: Maybe<Scalars['Int']['output']>;
   tags?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['Int']['output']>;
   user_created?: Maybe<Scalars['Int']['output']>;
@@ -434,18 +550,91 @@ export type ArticlesAggregatedFields = {
   sort?: Maybe<Scalars['Float']['output']>;
 };
 
+export type ArticlesFiles = {
+  __typename?: 'articles_files';
+  articles_id?: Maybe<Articles>;
+  directus_files_id?: Maybe<DirectusFiles>;
+  id: Scalars['ID']['output'];
+};
+
+
+export type ArticlesFilesArticlesIdArgs = {
+  filter?: InputMaybe<ArticlesFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ArticlesFilesDirectusFilesIdArgs = {
+  filter?: InputMaybe<DirectusFilesFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ArticlesFilesAggregated = {
+  __typename?: 'articles_files_aggregated';
+  avg?: Maybe<ArticlesFilesAggregatedFields>;
+  avgDistinct?: Maybe<ArticlesFilesAggregatedFields>;
+  count?: Maybe<ArticlesFilesAggregatedCount>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<ArticlesFilesAggregatedCount>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<ArticlesFilesAggregatedFields>;
+  min?: Maybe<ArticlesFilesAggregatedFields>;
+  sum?: Maybe<ArticlesFilesAggregatedFields>;
+  sumDistinct?: Maybe<ArticlesFilesAggregatedFields>;
+};
+
+export type ArticlesFilesAggregatedCount = {
+  __typename?: 'articles_files_aggregated_count';
+  articles_id?: Maybe<Scalars['Int']['output']>;
+  directus_files_id?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+};
+
+export type ArticlesFilesAggregatedFields = {
+  __typename?: 'articles_files_aggregated_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ArticlesFilesFilter = {
+  _and?: InputMaybe<Array<InputMaybe<ArticlesFilesFilter>>>;
+  _or?: InputMaybe<Array<InputMaybe<ArticlesFilesFilter>>>;
+  articles_id?: InputMaybe<ArticlesFilter>;
+  directus_files_id?: InputMaybe<DirectusFilesFilter>;
+  id?: InputMaybe<NumberFilterOperators>;
+};
+
+export type ArticlesFilesMutated = {
+  __typename?: 'articles_files_mutated';
+  data?: Maybe<ArticlesFiles>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
 export type ArticlesFilter = {
   _and?: InputMaybe<Array<InputMaybe<ArticlesFilter>>>;
   _or?: InputMaybe<Array<InputMaybe<ArticlesFilter>>>;
   body?: InputMaybe<StringFilterOperators>;
+  cover_image?: InputMaybe<DirectusFilesFilter>;
   date_created?: InputMaybe<DateFilterOperators>;
   date_created_func?: InputMaybe<DatetimeFunctionFilterOperators>;
   date_updated?: InputMaybe<DateFilterOperators>;
   date_updated_func?: InputMaybe<DatetimeFunctionFilterOperators>;
+  files?: InputMaybe<ArticlesFilesFilter>;
+  files_func?: InputMaybe<CountFunctionFilterOperators>;
+  frontpage_articles?: InputMaybe<FrontpageFilter>;
   id?: InputMaybe<StringFilterOperators>;
   slug?: InputMaybe<StringFilterOperators>;
   sort?: InputMaybe<NumberFilterOperators>;
   status?: InputMaybe<StringFilterOperators>;
+  summary?: InputMaybe<StringFilterOperators>;
   tags?: InputMaybe<ArticlesTagsFilter>;
   tags_func?: InputMaybe<CountFunctionFilterOperators>;
   title?: InputMaybe<StringFilterOperators>;
@@ -1302,6 +1491,40 @@ export type DownloadlinkMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type Frontpage = {
+  __typename?: 'frontpage';
+  articles?: Maybe<Array<Maybe<Articles>>>;
+  articles_func?: Maybe<CountFunctions>;
+  id: Scalars['ID']['output'];
+  welcome_message?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type FrontpageArticlesArgs = {
+  filter?: InputMaybe<ArticlesFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type FrontpageFilter = {
+  _and?: InputMaybe<Array<InputMaybe<FrontpageFilter>>>;
+  _or?: InputMaybe<Array<InputMaybe<FrontpageFilter>>>;
+  articles?: InputMaybe<ArticlesFilter>;
+  articles_func?: InputMaybe<CountFunctionFilterOperators>;
+  id?: InputMaybe<StringFilterOperators>;
+  welcome_message?: InputMaybe<StringFilterOperators>;
+};
+
+export type FrontpageMutated = {
+  __typename?: 'frontpage_mutated';
+  data?: Maybe<Frontpage>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
 export type HashFilterOperators = {
   _empty?: InputMaybe<Scalars['Boolean']['input']>;
   _nempty?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1626,16 +1849,28 @@ export type Tags = {
   __typename?: 'tags';
   articles?: Maybe<Array<Maybe<ArticlesTags>>>;
   articles_func?: Maybe<CountFunctions>;
+  cover_image?: Maybe<DirectusFiles>;
   id: Scalars['ID']['output'];
-  name?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
   slug: Scalars['String']['output'];
   sort?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['String']['output']>;
+  summary?: Maybe<Scalars['String']['output']>;
 };
 
 
 export type TagsArticlesArgs = {
   filter?: InputMaybe<ArticlesTagsFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type TagsCoverImageArgs = {
+  filter?: InputMaybe<DirectusFilesFilter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -1660,11 +1895,13 @@ export type TagsAggregated = {
 export type TagsAggregatedCount = {
   __typename?: 'tags_aggregated_count';
   articles?: Maybe<Scalars['Int']['output']>;
+  cover_image?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['Int']['output']>;
   slug?: Maybe<Scalars['Int']['output']>;
   sort?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['Int']['output']>;
+  summary?: Maybe<Scalars['Int']['output']>;
 };
 
 export type TagsAggregatedFields = {
@@ -1677,11 +1914,13 @@ export type TagsFilter = {
   _or?: InputMaybe<Array<InputMaybe<TagsFilter>>>;
   articles?: InputMaybe<ArticlesTagsFilter>;
   articles_func?: InputMaybe<CountFunctionFilterOperators>;
+  cover_image?: InputMaybe<DirectusFilesFilter>;
   id?: InputMaybe<StringFilterOperators>;
   name?: InputMaybe<StringFilterOperators>;
   slug?: InputMaybe<StringFilterOperators>;
   sort?: InputMaybe<NumberFilterOperators>;
   status?: InputMaybe<StringFilterOperators>;
+  summary?: InputMaybe<StringFilterOperators>;
 };
 
 export type TagsMutated = {
@@ -1691,46 +1930,141 @@ export type TagsMutated = {
   key: Scalars['ID']['output'];
 };
 
+export type UserFeedbacks = {
+  __typename?: 'user_feedbacks';
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<DatetimeFunctions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<DatetimeFunctions>;
+  id: Scalars['ID']['output'];
+  message: Scalars['String']['output'];
+  sender_name?: Maybe<Scalars['String']['output']>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<DirectusUsers>;
+  user_updated?: Maybe<DirectusUsers>;
+};
+
+
+export type UserFeedbacksUserCreatedArgs = {
+  filter?: InputMaybe<DirectusUsersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type UserFeedbacksUserUpdatedArgs = {
+  filter?: InputMaybe<DirectusUsersFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type UserFeedbacksAggregated = {
+  __typename?: 'user_feedbacks_aggregated';
+  avg?: Maybe<UserFeedbacksAggregatedFields>;
+  avgDistinct?: Maybe<UserFeedbacksAggregatedFields>;
+  count?: Maybe<UserFeedbacksAggregatedCount>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<UserFeedbacksAggregatedCount>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<UserFeedbacksAggregatedFields>;
+  min?: Maybe<UserFeedbacksAggregatedFields>;
+  sum?: Maybe<UserFeedbacksAggregatedFields>;
+  sumDistinct?: Maybe<UserFeedbacksAggregatedFields>;
+};
+
+export type UserFeedbacksAggregatedCount = {
+  __typename?: 'user_feedbacks_aggregated_count';
+  date_created?: Maybe<Scalars['Int']['output']>;
+  date_updated?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  message?: Maybe<Scalars['Int']['output']>;
+  sender_name?: Maybe<Scalars['Int']['output']>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  user_created?: Maybe<Scalars['Int']['output']>;
+  user_updated?: Maybe<Scalars['Int']['output']>;
+};
+
+export type UserFeedbacksAggregatedFields = {
+  __typename?: 'user_feedbacks_aggregated_fields';
+  sort?: Maybe<Scalars['Float']['output']>;
+};
+
+export type UserFeedbacksFilter = {
+  _and?: InputMaybe<Array<InputMaybe<UserFeedbacksFilter>>>;
+  _or?: InputMaybe<Array<InputMaybe<UserFeedbacksFilter>>>;
+  date_created?: InputMaybe<DateFilterOperators>;
+  date_created_func?: InputMaybe<DatetimeFunctionFilterOperators>;
+  date_updated?: InputMaybe<DateFilterOperators>;
+  date_updated_func?: InputMaybe<DatetimeFunctionFilterOperators>;
+  id?: InputMaybe<StringFilterOperators>;
+  message?: InputMaybe<StringFilterOperators>;
+  sender_name?: InputMaybe<StringFilterOperators>;
+  sort?: InputMaybe<NumberFilterOperators>;
+  status?: InputMaybe<StringFilterOperators>;
+  user_created?: InputMaybe<DirectusUsersFilter>;
+  user_updated?: InputMaybe<DirectusUsersFilter>;
+};
+
+export type UserFeedbacksMutated = {
+  __typename?: 'user_feedbacks_mutated';
+  data?: Maybe<UserFeedbacks>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
 export type GetDownloadLinkQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetDownloadLinkQuery = { __typename?: 'Query', downloadlink?: { __typename?: 'downloadlink', id: string, link?: { __typename?: 'menulinks', id: string, title?: string | null, url: string, status?: string | null } | null } | null };
+export type GetDownloadLinkQuery = { __typename?: 'Query', downloadlink?: { __typename?: 'downloadlink', id: string, menulink?: { __typename?: 'menulinks', id: string, title?: string | null, url: string, status?: string | null } | null } | null };
+
+export type GetFrontpageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetFrontpageQuery = { __typename?: 'Query', frontpage?: { __typename?: 'frontpage', id: string, welcome_message?: string | null, articles?: Array<{ __typename?: 'articles', id: string, title?: string | null, summary?: string | null, slug: string, cover_image?: { __typename?: 'directus_files', id: string, filename_disk?: string | null, filename_download: string, type?: string | null, description?: string | null, filesize?: any | null, folder?: { __typename?: 'directus_folders', name: string } | null } | null } | null> | null } | null };
 
 export type GetMainMenuQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMainMenuQuery = { __typename?: 'Query', mainmenu?: { __typename?: 'mainmenu', items?: Array<{ __typename?: 'mainmenu_menulinks', link?: { __typename?: 'menulinks', id: string, title?: string | null, url: string, status?: string | null, sort?: number | null } | null } | null> | null } | null };
+export type GetMainMenuQuery = { __typename?: 'Query', mainmenu?: { __typename?: 'mainmenu', items?: Array<{ __typename?: 'mainmenu_menulinks', menulinks_id?: { __typename?: 'menulinks', id: string, title?: string | null, url: string, status?: string | null, sort?: number | null } | null } | null> | null } | null };
 
 export type GetPathQueryVariables = Exact<{
   path: Scalars['String']['input'];
 }>;
 
 
-export type GetPathQuery = { __typename?: 'Query', articles: Array<{ __typename?: 'articles', id: string, title?: string | null, body?: string | null, tags?: Array<{ __typename?: 'articles_tags', tag?: { __typename?: 'tags', id: string, name?: string | null, slug: string } | null } | null> | null }> };
+export type GetPathQuery = { __typename?: 'Query', articles: Array<{ __typename?: 'articles', id: string, title?: string | null, body?: string | null, tags?: Array<{ __typename?: 'articles_tags', tags_id?: { __typename?: 'tags', id: string, name: string, slug: string } | null } | null> | null }>, tags: Array<{ __typename?: 'tags', id: string, name: string, slug: string, status?: string | null, articles?: Array<{ __typename?: 'articles_tags', articles_id?: { __typename?: 'articles', id: string, title?: string | null, summary?: string | null, slug: string, cover_image?: { __typename?: 'directus_files', id: string, filename_disk?: string | null, filename_download: string, type?: string | null, description?: string | null, filesize?: any | null, folder?: { __typename?: 'directus_folders', name: string } | null } | null } | null } | null> | null }> };
 
 export type GetSideMenuQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSideMenuQuery = { __typename?: 'Query', sidemenu?: { __typename?: 'sidemenu', items?: Array<{ __typename?: 'sidemenu_menulinks', link?: { __typename?: 'menulinks', id: string, title?: string | null, url: string, status?: string | null, sort?: number | null } | null } | null> | null } | null };
+export type GetSideMenuQuery = { __typename?: 'Query', sidemenu?: { __typename?: 'sidemenu', items?: Array<{ __typename?: 'sidemenu_menulinks', menulinks_id?: { __typename?: 'menulinks', id: string, title?: string | null, url: string, status?: string | null, sort?: number | null } | null } | null> | null } | null };
 
 export type GetTagQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type GetTagQuery = { __typename?: 'Query', tag?: { __typename?: 'tags', id: string, name?: string | null, slug: string, status?: string | null, articles?: Array<{ __typename?: 'articles_tags', article?: { __typename?: 'articles', id: string, title?: string | null, slug: string } | null } | null> | null } | null };
+export type GetTagQuery = { __typename?: 'Query', tag?: { __typename?: 'tags', id: string, name: string, slug: string, status?: string | null, articles?: Array<{ __typename?: 'articles_tags', articles_id?: { __typename?: 'articles', id: string, title?: string | null, summary?: string | null, slug: string, cover_image?: { __typename?: 'directus_files', id: string, filename_disk?: string | null, filename_download: string, type?: string | null, description?: string | null, filesize?: any | null, folder?: { __typename?: 'directus_folders', name: string } | null } | null } | null } | null> | null } | null };
 
 export type GetTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTagsQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'tags', id: string, name?: string | null, slug: string, status?: string | null, articles_func?: { __typename?: 'count_functions', count?: number | null } | null }> };
+export type GetTagsQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'tags', id: string, name: string, slug: string, status?: string | null, articles_func?: { __typename?: 'count_functions', count?: number | null } | null }> };
 
 
 export const GetDownloadLinkDocument = gql`
     query GET_DOWNLOAD_LINK {
   downloadlink {
     id
-    link: menulink {
+    menulink {
       id
       title
       url
@@ -1759,11 +2093,56 @@ export function useGetDownloadLinkLazyQuery(options: VueApolloComposable.UseQuer
   return VueApolloComposable.useLazyQuery<GetDownloadLinkQuery, GetDownloadLinkQueryVariables>(GetDownloadLinkDocument, {}, options);
 }
 export type GetDownloadLinkQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetDownloadLinkQuery, GetDownloadLinkQueryVariables>;
+export const GetFrontpageDocument = gql`
+    query GET_FRONTPAGE {
+  frontpage {
+    id
+    welcome_message
+    articles {
+      id
+      title
+      cover_image {
+        id
+        folder {
+          name
+        }
+        filename_disk
+        filename_download
+        type
+        description
+        filesize
+      }
+      summary
+      slug
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetFrontpageQuery__
+ *
+ * To run a query within a Vue component, call `useGetFrontpageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetFrontpageQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetFrontpageQuery();
+ */
+export function useGetFrontpageQuery(options: VueApolloComposable.UseQueryOptions<GetFrontpageQuery, GetFrontpageQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetFrontpageQuery, GetFrontpageQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetFrontpageQuery, GetFrontpageQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetFrontpageQuery, GetFrontpageQueryVariables>(GetFrontpageDocument, {}, options);
+}
+export function useGetFrontpageLazyQuery(options: VueApolloComposable.UseQueryOptions<GetFrontpageQuery, GetFrontpageQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetFrontpageQuery, GetFrontpageQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetFrontpageQuery, GetFrontpageQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetFrontpageQuery, GetFrontpageQueryVariables>(GetFrontpageDocument, {}, options);
+}
+export type GetFrontpageQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetFrontpageQuery, GetFrontpageQueryVariables>;
 export const GetMainMenuDocument = gql`
     query GET_MAIN_MENU {
   mainmenu {
     items {
-      link: menulinks_id {
+      menulinks_id {
         id
         title
         url
@@ -1801,9 +2180,34 @@ export const GetPathDocument = gql`
     title
     body
     tags {
-      tag: tags_id {
+      tags_id {
         id
         name
+        slug
+      }
+    }
+  }
+  tags(filter: {slug: {_eq: $path}}) {
+    id
+    name
+    slug
+    status
+    articles {
+      articles_id {
+        id
+        title
+        cover_image {
+          id
+          folder {
+            name
+          }
+          filename_disk
+          filename_download
+          type
+          description
+          filesize
+        }
+        summary
         slug
       }
     }
@@ -1837,7 +2241,7 @@ export const GetSideMenuDocument = gql`
     query GET_SIDE_MENU {
   sidemenu {
     items {
-      link: menulinks_id {
+      menulinks_id {
         id
         title
         url
@@ -1876,9 +2280,21 @@ export const GetTagDocument = gql`
     slug
     status
     articles {
-      article: articles_id {
+      articles_id {
         id
         title
+        cover_image {
+          id
+          folder {
+            name
+          }
+          filename_disk
+          filename_download
+          type
+          description
+          filesize
+        }
+        summary
         slug
       }
     }

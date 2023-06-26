@@ -18,5 +18,5 @@
     import type { GetSideMenuQuery, Menulinks } from '~/api/apollo'
 
     const { data: sideMenuData } = await useAsyncQuery<GetSideMenuQuery>(GET_SIDE_MENU)
-    const sideMenuItems = computed(() => sideMenuData?.value?.sidemenu?.items?.map((item) => item?.link as Menulinks))
+    const sideMenuItems = computed(() => sideMenuData?.value?.sidemenu?.items?.map((item) => item?.menulinks_id as Menulinks))
 </script>

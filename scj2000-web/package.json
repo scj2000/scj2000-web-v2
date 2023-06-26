@@ -20,6 +20,7 @@
     "@graphql-codegen/typescript-graphql-files-modules": "^2.2.1",
     "@graphql-codegen/typescript-operations": "^4.0.0",
     "@graphql-codegen/typescript-vue-apollo": "^3.3.7",
+    "@nuxt/image": "^1.0.0-rc.1",
     "@nuxtjs/apollo": "^5.0.0-alpha.6",
     "@nuxtjs/svg": "^0.0.0",
     "@nuxtjs/tailwindcss": "^6.6.6",

@@ -5,7 +5,7 @@
                 <SideMenu />
             </section>
             <section v-if="tagId" class="p-2">
-                <Tag :id="tagId" />
+                <TagArticleLinks :id="tagId" />
             </section>
             <section class="p-2">
                 <TagCloud />
@@ -15,13 +15,16 @@
             <template v-if="article">
                 <ArticleContent :data="article" />
             </template>
+            <template v-else-if="tag">
+                <TagContent :data="tag" />
+            </template>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
     import GET_PATH from '~/api/graphql/GET_PATH.gql'
-    import type { GetPathQuery, Articles } from '~/api/apollo'
+    import type { GetPathQuery, Articles, Tags } from '~/api/apollo'
 
     const route = useRoute()
 
@@ -29,5 +32,7 @@
     const { data } = await useAsyncQuery<GetPathQuery>(GET_PATH, { path })
    
     const article = computed(() => data.value?.articles?.[0] as Articles)
-    const tagId = computed(() => data.value?.articles?.[0]?.tags?.[0]?.tag?.id)
+    const tagId = computed(() => data.value?.articles?.[0]?.tags?.[0]?.tags_id?.id)
+
+    const tag = computed(() => data.value?.tags?.[0] as Tags)
 </script>

@@ -1,7 +1,7 @@
 query GET_DOWNLOAD_LINK {
     downloadlink {
         id
-        link: menulink {
+        menulink {
           id
           title
           url

@@ -25,6 +25,29 @@ collections:
       unarchive_value: draft
     schema:
       name: articles
+  - collection: articles_files
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: articles_files
+      color: null
+      display_template: null
+      group: null
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      name: articles_files
   - collection: articles_tags
     meta:
       accountability: all
@@ -71,6 +94,29 @@ collections:
       unarchive_value: null
     schema:
       name: downloadlink
+  - collection: frontpage
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: frontpage
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: true
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      name: frontpage
   - collection: mainmenu
     meta:
       accountability: all
@@ -209,6 +255,29 @@ collections:
       unarchive_value: draft
     schema:
       name: tags
+  - collection: user_feedbacks
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: status
+      archive_value: archived
+      collapse: open
+      collection: user_feedbacks
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: sort
+      translations: null
+      unarchive_value: draft
+    schema:
+      name: user_feedbacks
 fields:
   - collection: articles
     field: body
@@ -226,7 +295,7 @@ fields:
       options: null
       readonly: false
       required: true
-      sort: 4
+      sort: 5
       special: null
       translations: null
       validation: null
@@ -249,6 +318,45 @@ fields:
       foreign_key_table: null
       foreign_key_column: null
   - collection: articles
+    field: cover_image
+    type: uuid
+    meta:
+      collection: articles
+      conditions: null
+      display: null
+      display_options: null
+      field: cover_image
+      group: null
+      hidden: false
+      interface: file-image
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 7
+      special:
+        - file
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: cover_image
+      table: articles
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_files
+      foreign_key_column: id
+  - collection: articles
     field: date_created
     type: timestamp
     meta:
@@ -265,7 +373,7 @@ fields:
       options: null
       readonly: true
       required: false
-      sort: 9
+      sort: 12
       special:
         - date-created
       translations: null
@@ -305,7 +413,7 @@ fields:
       options: null
       readonly: true
       required: false
-      sort: 11
+      sort: 14
       special:
         - date-updated
       translations: null
@@ -328,6 +436,67 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
+  - collection: articles
+    field: files
+    type: alias
+    meta:
+      collection: articles
+      conditions: null
+      display: null
+      display_options: null
+      field: files
+      group: null
+      hidden: false
+      interface: files
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 8
+      special:
+        - files
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: articles
+    field: frontpage_articles
+    type: uuid
+    meta:
+      collection: articles
+      conditions: null
+      display: null
+      display_options: null
+      field: frontpage_articles
+      group: null
+      hidden: true
+      interface: select-dropdown-m2o
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: frontpage_articles
+      table: articles
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: frontpage
+      foreign_key_column: id
   - collection: articles
     field: id
     type: uuid
@@ -421,7 +590,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 7
+      sort: 10
       special: null
       translations: null
       validation: null
@@ -480,7 +649,7 @@ fields:
             value: archived
       readonly: false
       required: false
-      sort: 6
+      sort: 9
       special: null
       translations: null
       validation: null
@@ -495,6 +664,44 @@ fields:
       numeric_precision: null
       numeric_scale: null
       is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: articles
+    field: summary
+    type: text
+    meta:
+      collection: articles
+      conditions: null
+      display: null
+      display_options: null
+      field: summary
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: summary
+      table: articles
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
       is_unique: false
       is_primary_key: false
       is_generated: false
@@ -520,7 +727,7 @@ fields:
         template: '{{tags_id.name}}'
       readonly: false
       required: false
-      sort: 5
+      sort: 6
       special:
         - m2m
       translations: null
@@ -582,7 +789,7 @@ fields:
         template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
       readonly: true
       required: false
-      sort: 8
+      sort: 11
       special:
         - user-created
       translations: null
@@ -622,7 +829,7 @@ fields:
         template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
       readonly: true
       required: false
-      sort: 10
+      sort: 13
       special:
         - user-updated
       translations: null
@@ -645,6 +852,120 @@ fields:
       has_auto_increment: false
       foreign_key_table: directus_users
       foreign_key_column: id
+  - collection: articles_files
+    field: articles_id
+    type: uuid
+    meta:
+      collection: articles_files
+      conditions: null
+      display: null
+      display_options: null
+      field: articles_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: articles_id
+      table: articles_files
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: articles
+      foreign_key_column: id
+  - collection: articles_files
+    field: directus_files_id
+    type: uuid
+    meta:
+      collection: articles_files
+      conditions: null
+      display: null
+      display_options: null
+      field: directus_files_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: directus_files_id
+      table: articles_files
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_files
+      foreign_key_column: id
+  - collection: articles_files
+    field: id
+    type: integer
+    meta:
+      collection: articles_files
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: articles_files
+      data_type: integer
+      default_value: nextval('articles_files_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: articles_tags
     field: articles_id
     type: uuid
@@ -839,6 +1160,108 @@ fields:
       has_auto_increment: false
       foreign_key_table: menulinks
       foreign_key_column: id
+  - collection: frontpage
+    field: articles
+    type: alias
+    meta:
+      collection: frontpage
+      conditions: null
+      display: null
+      display_options: null
+      field: articles
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableLink: true
+        template: '{{title}}'
+      readonly: false
+      required: false
+      sort: null
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: frontpage
+    field: id
+    type: uuid
+    meta:
+      collection: frontpage
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: null
+      special:
+        - uuid
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: frontpage
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: frontpage
+    field: welcome_message
+    type: text
+    meta:
+      collection: frontpage
+      conditions: null
+      display: null
+      display_options: null
+      field: welcome_message
+      group: null
+      hidden: false
+      interface: input-rich-text-html
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: welcome_message
+      table: frontpage
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: mainmenu
     field: id
     type: uuid
@@ -1501,13 +1924,52 @@ fields:
         template: '{{articles_id.title}}'
       readonly: false
       required: false
-      sort: 4
+      sort: 6
       special:
         - m2m
       translations: null
       validation: null
       validation_message: null
       width: full
+  - collection: tags
+    field: cover_image
+    type: uuid
+    meta:
+      collection: tags
+      conditions: null
+      display: null
+      display_options: null
+      field: cover_image
+      group: null
+      hidden: false
+      interface: file-image
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 5
+      special:
+        - file
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: cover_image
+      table: tags
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_files
+      foreign_key_column: id
   - collection: tags
     field: id
     type: uuid
@@ -1577,8 +2039,8 @@ fields:
       max_length: 255
       numeric_precision: null
       numeric_scale: null
-      is_nullable: true
-      is_unique: false
+      is_nullable: false
+      is_unique: true
       is_primary_key: false
       is_generated: false
       generation_expression: null
@@ -1639,7 +2101,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 6
+      sort: 8
       special: null
       translations: null
       validation: null
@@ -1698,7 +2160,7 @@ fields:
             value: archived
       readonly: false
       required: false
-      sort: 5
+      sort: 7
       special: null
       translations: null
       validation: null
@@ -1720,7 +2182,459 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
+  - collection: tags
+    field: summary
+    type: text
+    meta:
+      collection: tags
+      conditions: null
+      display: null
+      display_options: null
+      field: summary
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: summary
+      table: tags
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: user_feedbacks
+    field: date_created
+    type: timestamp
+    meta:
+      collection: user_feedbacks
+      conditions: null
+      display: datetime
+      display_options:
+        relative: true
+      field: date_created
+      group: null
+      hidden: true
+      interface: datetime
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 7
+      special:
+        - date-created
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: date_created
+      table: user_feedbacks
+      data_type: timestamp with time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: user_feedbacks
+    field: date_updated
+    type: timestamp
+    meta:
+      collection: user_feedbacks
+      conditions: null
+      display: datetime
+      display_options:
+        relative: true
+      field: date_updated
+      group: null
+      hidden: true
+      interface: datetime
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 9
+      special:
+        - date-updated
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: date_updated
+      table: user_feedbacks
+      data_type: timestamp with time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: user_feedbacks
+    field: id
+    type: uuid
+    meta:
+      collection: user_feedbacks
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special:
+        - uuid
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: user_feedbacks
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: user_feedbacks
+    field: message
+    type: text
+    meta:
+      collection: user_feedbacks
+      conditions: null
+      display: null
+      display_options: null
+      field: message
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: message
+      table: user_feedbacks
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: user_feedbacks
+    field: sender_name
+    type: string
+    meta:
+      collection: user_feedbacks
+      conditions: null
+      display: null
+      display_options: null
+      field: sender_name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sender_name
+      table: user_feedbacks
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: user_feedbacks
+    field: sort
+    type: integer
+    meta:
+      collection: user_feedbacks
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sort
+      table: user_feedbacks
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: user_feedbacks
+    field: status
+    type: string
+    meta:
+      collection: user_feedbacks
+      conditions: null
+      display: labels
+      display_options:
+        choices:
+          - text: $t:published
+            value: published
+            foreground: '#FFFFFF'
+            background: var(--primary)
+          - text: $t:draft
+            value: draft
+            foreground: '#18222F'
+            background: '#D3DAE4'
+          - text: $t:archived
+            value: archived
+            foreground: '#FFFFFF'
+            background: var(--warning)
+        showAsDot: true
+      field: status
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        choices:
+          - text: $t:published
+            value: published
+          - text: $t:draft
+            value: draft
+          - text: $t:archived
+            value: archived
+      readonly: false
+      required: false
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: status
+      table: user_feedbacks
+      data_type: character varying
+      default_value: draft
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: user_feedbacks
+    field: user_created
+    type: uuid
+    meta:
+      collection: user_feedbacks
+      conditions: null
+      display: user
+      display_options: null
+      field: user_created
+      group: null
+      hidden: true
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
+      readonly: true
+      required: false
+      sort: 6
+      special:
+        - user-created
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: user_created
+      table: user_feedbacks
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_users
+      foreign_key_column: id
+  - collection: user_feedbacks
+    field: user_updated
+    type: uuid
+    meta:
+      collection: user_feedbacks
+      conditions: null
+      display: user
+      display_options: null
+      field: user_updated
+      group: null
+      hidden: true
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
+      readonly: true
+      required: false
+      sort: 8
+      special:
+        - user-updated
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: user_updated
+      table: user_feedbacks
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_users
+      foreign_key_column: id
 relations:
+  - collection: articles
+    field: cover_image
+    related_collection: directus_files
+    meta:
+      junction_field: null
+      many_collection: articles
+      many_field: cover_image
+      one_allowed_collections: null
+      one_collection: directus_files
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: articles
+      column: cover_image
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      constraint_name: articles_cover_image_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: articles
+    field: frontpage_articles
+    related_collection: frontpage
+    meta:
+      junction_field: null
+      many_collection: articles
+      many_field: frontpage_articles
+      one_allowed_collections: null
+      one_collection: frontpage
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: articles
+      sort_field: null
+    schema:
+      table: articles
+      column: frontpage_articles
+      foreign_key_table: frontpage
+      foreign_key_column: id
+      constraint_name: articles_frontpage_articles_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: articles
     field: user_created
     related_collection: directus_users
@@ -1763,6 +2677,48 @@ relations:
       constraint_name: articles_user_updated_foreign
       on_update: NO ACTION
       on_delete: NO ACTION
+  - collection: articles_files
+    field: articles_id
+    related_collection: articles
+    meta:
+      junction_field: directus_files_id
+      many_collection: articles_files
+      many_field: articles_id
+      one_allowed_collections: null
+      one_collection: articles
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: files
+      sort_field: null
+    schema:
+      table: articles_files
+      column: articles_id
+      foreign_key_table: articles
+      foreign_key_column: id
+      constraint_name: articles_files_articles_id_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: articles_files
+    field: directus_files_id
+    related_collection: directus_files
+    meta:
+      junction_field: articles_id
+      many_collection: articles_files
+      many_field: directus_files_id
+      one_allowed_collections: null
+      one_collection: directus_files
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: articles_files
+      column: directus_files_id
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      constraint_name: articles_files_directus_files_id_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: articles_tags
     field: articles_id
     related_collection: articles
@@ -1952,3 +2908,66 @@ relations:
       constraint_name: sidemenu_menulinks_sidemenu_id_foreign
       on_update: NO ACTION
       on_delete: SET NULL
+  - collection: tags
+    field: cover_image
+    related_collection: directus_files
+    meta:
+      junction_field: null
+      many_collection: tags
+      many_field: cover_image
+      one_allowed_collections: null
+      one_collection: directus_files
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: tags
+      column: cover_image
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      constraint_name: tags_cover_image_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: user_feedbacks
+    field: user_created
+    related_collection: directus_users
+    meta:
+      junction_field: null
+      many_collection: user_feedbacks
+      many_field: user_created
+      one_allowed_collections: null
+      one_collection: directus_users
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: user_feedbacks
+      column: user_created
+      foreign_key_table: directus_users
+      foreign_key_column: id
+      constraint_name: user_feedbacks_user_created_foreign
+      on_update: NO ACTION
+      on_delete: NO ACTION
+  - collection: user_feedbacks
+    field: user_updated
+    related_collection: directus_users
+    meta:
+      junction_field: null
+      many_collection: user_feedbacks
+      many_field: user_updated
+      one_allowed_collections: null
+      one_collection: directus_users
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: user_feedbacks
+      column: user_updated
+      foreign_key_table: directus_users
+      foreign_key_column: id
+      constraint_name: user_feedbacks_user_updated_foreign
+      on_update: NO ACTION
+      on_delete: NO ACTION

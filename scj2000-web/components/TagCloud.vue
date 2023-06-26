@@ -10,7 +10,10 @@
             :spacing="0.1"
         >
             <template v-slot="item">
-                <div :title="(item.weight)" class="hover:text-white" style="cursor: pointer;" @click="onWordClick((item.word))">
+                <div :title="(item.weight)" 
+                    class="hover:text-white" 
+                    style="cursor: pointer;" 
+                    @click="onWordClick((item.text))">
                 {{ item.text }}
                 </div>
             </template>
@@ -24,7 +27,21 @@
     import type { GetTagsQuery, Tags } from '~/api/apollo'
 
     const { data: tagCloudData } = await useAsyncQuery<GetTagsQuery>(GET_TAGS, {pageSize: 100})
-    const tagCloudItems = computed(() => tagCloudData?.value?.tags?.map((item: Tags) => [item?.name, item?.articles_func?.count]))
+    const tags = computed(() => {
+        let map: Map<string, Tags> = new Map()
+        tagCloudData?.value?.tags?.reduce((map, item) => {
+            map.set(item.name, item)
+            return map
+        }, map)
+        return map
+    })
+    const tagCloudItems = computed(() => tagCloudData?.value?.tags?.map((item: Tags) => {
+        return {
+            text: item?.name, 
+            weight: item?.articles_func?.count,
+            url: item?.slug,
+        }
+    }))
     const itemRotationTurn = (n: number) => {
         const rotationTurn = [ 1/8, 7/8 ]
         const random = Math.floor(Math.random() * rotationTurn.length)
@@ -35,7 +52,9 @@
         const random = Math.floor(Math.random() * color.length)
         return color[random]
     }
-    const onWordClick = (word:string) => {
-        console.log(word)
+    const onWordClick = async (word:string) => {
+        const tag = tags.value.get(word)
+        const url = tag?.slug
+        await navigateTo(url)
     }
 </script>

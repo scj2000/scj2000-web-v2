@@ -1,15 +1,9 @@
 <template>
   <div class="app">
     <SeoKit />
-    <OgImageScreenshot />
-    <ClientOnly>
-      <div class="background-curtain">
-        <video v-if="viewport.isGreaterThan('xs')" class="background-curtain" src="/videos/ink.mp4" autoplay loop muted></video>
-      </div>
-      <template #fallback>
-        <div class="background-curtain"></div>
-      </template>
-    </ClientOnly>
+    <div class="background-curtain">
+      <video v-if="viewport.isGreaterThan('xs')" class="background-curtain" src="/videos/ink.mp4" autoplay loop muted></video>
+    </div>
     <div class="main">
       <div class="hidden lg:block">
         <div class="grid grid-cols-12 gap-2 h-2">

@@ -1,0 +1,23 @@
+query GET_FRONTPAGE {
+  frontpage {
+	  id
+    welcome_message
+    articles {
+        id
+        title
+        cover_image {
+            id
+            folder {
+                name
+            }
+            filename_disk
+            filename_download
+            type
+            description
+            filesize
+        }
+        summary
+        slug
+    }
+  }
+}

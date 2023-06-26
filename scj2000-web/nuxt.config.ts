@@ -6,6 +6,11 @@ export default defineNuxtConfig({
         transpile: [
             '@apollo/client',
             'ts-invariant/process',
+            '@fortawesome/vue-fontawesome',
+            '@fortawesome/fontawesome-svg-core',
+            '@fortawesome/free-brands-svg-icons',
+            '@fortawesome/free-regular-svg-icons',
+            '@fortawesome/free-solid-svg-icons',
         ],
     },
     runtimeConfig: {
@@ -15,25 +20,29 @@ export default defineNuxtConfig({
             siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.scj2000.net',
             siteName: '快倉中文輸入法',
             siteDescription: '歡迎來到快倉中文輸入法網站！',
-            language: 'zh-Hant',
+            language: 'zh-HK',
         }
     },
     app: {
         head: {
           charset: 'utf-8',
           link: [
-            // {
-            //     rel: 'preload',
-            //     href: '/fonts/Free-HK-Kai_4700-v1.02.woff2',
-            //     as: 'font',
-            //     type: 'font/woff2',
-            // },
-            // {
-            //     rel: 'preload',
-            //     href: '/fonts/TW-Kai-98_1.woff2',
-            //     as: 'font',
-            //     type: 'font/woff2',
-            // },     
+            {
+                rel: 'preload',
+                href: '/fonts/Free-HK-Kai_4700-v1.02.woff2',
+                as: 'font',
+                type: 'font/woff2',
+                media: 'print',
+                onload: 'this.media=\'all\'',
+            },
+            {
+                rel: 'preload',
+                href: '/fonts/TW-Kai-98_1.woff2',
+                as: 'font',
+                type: 'font/woff2',
+                media: 'print',
+                onload: 'this.media=\'all\'',
+            },     
           ],
         }
     },
@@ -44,6 +53,16 @@ export default defineNuxtConfig({
     modules: [
         '@nuxtjs/apollo',
         '@nuxtjs/tailwindcss',
+        [
+            '@nuxt/image', {
+                directus: {
+                    baseURL: process.env.ASSETS_BASEURL || "http://scj2000-cms:8055/assets/",
+                    modifiers: {
+                        withoutEnlargement: 'true',
+                    }
+                }
+            }
+        ],
         [
             'nuxt-viewport', {
                 breakpoints: {

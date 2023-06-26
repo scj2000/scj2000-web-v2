@@ -1,7 +1,7 @@
 query GET_MAIN_MENU {
     mainmenu {
         items {
-        	link: menulinks_id {
+        	menulinks_id {
                 id
                 title
                 url

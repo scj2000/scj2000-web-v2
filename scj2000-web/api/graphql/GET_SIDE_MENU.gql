@@ -1,7 +1,7 @@
 query GET_SIDE_MENU {
     sidemenu {
         items {
-        	link: menulinks_id {
+        	menulinks_id {
                 id
                 title
                 url

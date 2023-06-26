@@ -33,9 +33,9 @@
     import type { GetMainMenuQuery, GetDownloadLinkQuery, Menulinks } from '~/api/apollo'
 
     const { data: mainMenuData } = await useAsyncQuery<GetMainMenuQuery>(GET_MAIN_MENU)
-    const mainMenuItems = computed(() => mainMenuData?.value?.mainmenu?.items?.map((item) => item?.link as Menulinks))
+    const mainMenuItems = computed(() => mainMenuData?.value?.mainmenu?.items?.map((item) => item?.menulinks_id as Menulinks))
 
     const { data: downloadLinkData } = await useAsyncQuery<GetDownloadLinkQuery>(GET_DOWNLOAD_LINK)
-    const downloadLinkItem = computed(() => downloadLinkData?.value?.downloadlink?.link as Menulinks)
+    const downloadLinkItem = computed(() => downloadLinkData?.value?.downloadlink?.menulink as Menulinks)
     const showMenu = ref(false)
 </script>

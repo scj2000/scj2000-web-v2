@@ -8,6 +8,15 @@ declare module '*/GET_DOWNLOAD_LINK.gql' {
 }
     
 
+declare module '*/GET_FRONTPAGE.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const GET_FRONTPAGE: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/GET_MAIN_MENU.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
