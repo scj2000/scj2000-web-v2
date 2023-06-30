@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "[CTRL-P], then [CTRL-Q] to detach"
+docker attach $(docker ps | grep docker.directus.service | awk '{print $1}')
+
