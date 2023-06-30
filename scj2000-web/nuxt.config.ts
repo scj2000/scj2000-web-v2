@@ -57,9 +57,7 @@ export default defineNuxtConfig({
             '@nuxt/image', {
                 directus: {
                     baseURL: process.env.ASSETS_BASEURL || "http://scj2000-cms:8055/assets/",
-                    modifiers: {
-                        withoutEnlargement: 'true',
-                    }
+                    modifiers: {},
                 }
             }
         ],
