@@ -23,7 +23,7 @@
     }>()
 
     const { data } = await useAsyncQuery<GetTagQuery>(GET_TAG, { id: props.id })
-    const articles = computed(() => data?.value?.tag?.articles?.map((item) => item?.articles_id as Articles))
-    const name = computed(() => data?.value?.tag?.name)
-    const url = computed(() => data?.value?.tag?.slug)
+    const articles = computed(() => data?.value?.tags?.[0]?.articles?.map((item) => item?.articles_id as Articles))
+    const name = computed(() => data?.value?.tags?.[0]?.name)
+    const url = computed(() => data?.value?.tags?.[0]?.slug)
 </script>

@@ -1,7 +1,7 @@
 query GET_DOWNLOAD_LINK {
     downloadlink {
         id
-        menulink {
+        menulink(filter: {status: {_eq: "published"}}) {
           id
           title
           url

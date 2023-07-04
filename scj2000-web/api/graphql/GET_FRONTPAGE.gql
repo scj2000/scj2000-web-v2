@@ -2,7 +2,7 @@ query GET_FRONTPAGE {
   frontpage {
 	  id
     welcome_message
-    articles {
+    articles(filter: {status: {_eq: "published"}}) {
         id
         title
         cover_image {

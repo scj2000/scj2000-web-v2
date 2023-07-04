@@ -11,12 +11,16 @@
                 <TagCloud />
             </section>
         </div>
-        <div class="col-span-12 my-2 lg:m-2 p-2 bg-gray-100 shadow-lg lg:col-span-9 2xl:col-span-10 lg:ml-0">
+        <div class="col-span-12 my-2 pb-12 lg:m-2 p-2 bg-gray-100 shadow-lg lg:col-span-9 2xl:col-span-10 lg:ml-0">
             <template v-if="article">
-                <ArticleContent :data="article" />
+                <ArticleContent :data="article" class="mb-4" />
+                <TagLinks :tags="tags" />
             </template>
             <template v-else-if="tag">
                 <TagContent :data="tag" />
+                <section class="lg:hidden p-2">
+                    <TagCloud />
+                </section>
             </template>
         </div>
     </div>
@@ -33,6 +37,6 @@
    
     const article = computed(() => data.value?.articles?.[0] as Articles)
     const tagId = computed(() => data.value?.articles?.[0]?.tags?.[0]?.tags_id?.id)
-
+    const tags =computed(() => data.value?.articles?.[0]?.tags?.map((item) => item?.tags_id) as Array<Tags>)
     const tag = computed(() => data.value?.tags?.[0] as Tags)
 </script>

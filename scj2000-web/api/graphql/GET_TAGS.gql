@@ -1,5 +1,5 @@
- query GET_TAGS {
-    tags (limit: 30, page: 1, sort: "-count(articles)") {
+query GET_TAGS {
+    tags (filter: {status: {_eq: "published"}}, limit: 30, page: 1, sort: "-count(articles)") {
         id
         name
         slug

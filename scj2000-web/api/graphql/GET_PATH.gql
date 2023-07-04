@@ -1,5 +1,5 @@
 query GET_PATH($path: String!){
-    articles (filter: {slug: {_eq: $path}}) {
+    articles (filter: {slug: {_eq: $path}, status: {_eq: "published"}}) {
         id
         title
         body
@@ -11,13 +11,13 @@ query GET_PATH($path: String!){
             }
         }
 	}
-    tags (filter: {slug: {_eq: $path}}) {
+    tags (filter: {slug: {_eq: $path}, status: {_eq: "published"}}) {
         id
         name
         slug
         status
         articles {
-            articles_id {
+            articles_id(filter: {status: {_eq: "published"}}) {
                 id
                 title
                 cover_image {

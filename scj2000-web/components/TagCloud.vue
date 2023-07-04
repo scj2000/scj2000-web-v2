@@ -1,7 +1,7 @@
 <template>
     <div class="p-4 text-red-500">
         <vue-word-cloud
-            style="height: 200px;"
+            :style="`height: ${height}px;`"
             :words="tagCloudItems"
             :rotation="(n:number) => itemRotationTurn(n)"
             :color="(n:number) => itemColor(n)"
@@ -25,6 +25,14 @@
     import VueWordCloud from 'vuewordcloud';
     import GET_TAGS from '~/api/graphql/GET_TAGS.gql'
     import type { GetTagsQuery, Tags } from '~/api/apollo'
+
+    export interface Props {
+        height?: number
+    }
+
+    const props = withDefaults(defineProps<Props>(), {
+        height: 200,
+    })
 
     const { data: tagCloudData } = await useAsyncQuery<GetTagsQuery>(GET_TAGS, {pageSize: 100})
     const tags = computed(() => {

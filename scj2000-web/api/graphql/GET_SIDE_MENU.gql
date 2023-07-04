@@ -1,7 +1,7 @@
 query GET_SIDE_MENU {
     sidemenu {
         items {
-        	menulinks_id {
+        	menulinks_id(filter: {status: {_eq: "published"}}) {
                 id
                 title
                 url

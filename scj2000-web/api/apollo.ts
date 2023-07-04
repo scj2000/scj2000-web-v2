@@ -29,6 +29,28 @@ export enum EventEnum {
   Update = 'update'
 }
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  create_user_feedbacks_item?: Maybe<UserFeedbacks>;
+  create_user_feedbacks_items: Array<UserFeedbacks>;
+};
+
+
+export type MutationCreateUserFeedbacksItemArgs = {
+  data: CreateUserFeedbacksInput;
+};
+
+
+export type MutationCreateUserFeedbacksItemsArgs = {
+  data?: InputMaybe<Array<CreateUserFeedbacksInput>>;
+  filter?: InputMaybe<UserFeedbacksFilter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type Query = {
   __typename?: 'Query';
   articles: Array<Articles>;
@@ -731,6 +753,18 @@ export type CountFunctionFilterOperators = {
 export type CountFunctions = {
   __typename?: 'count_functions';
   count?: Maybe<Scalars['Int']['output']>;
+};
+
+export type CreateUserFeedbacksInput = {
+  date_created?: InputMaybe<Scalars['Date']['input']>;
+  date_updated?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  message: Scalars['String']['input'];
+  sender_name?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Scalars['Int']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  user_created?: InputMaybe<Scalars['String']['input']>;
+  user_updated?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DateFilterOperators = {
@@ -1833,12 +1867,16 @@ export type StringFilterOperators = {
   _ends_with?: InputMaybe<Scalars['String']['input']>;
   _eq?: InputMaybe<Scalars['String']['input']>;
   _icontains?: InputMaybe<Scalars['String']['input']>;
+  _iends_with?: InputMaybe<Scalars['String']['input']>;
   _in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  _istarts_with?: InputMaybe<Scalars['String']['input']>;
   _ncontains?: InputMaybe<Scalars['String']['input']>;
   _nempty?: InputMaybe<Scalars['Boolean']['input']>;
   _nends_with?: InputMaybe<Scalars['String']['input']>;
   _neq?: InputMaybe<Scalars['String']['input']>;
+  _niends_with?: InputMaybe<Scalars['String']['input']>;
   _nin?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  _nistarts_with?: InputMaybe<Scalars['String']['input']>;
   _nnull?: InputMaybe<Scalars['Boolean']['input']>;
   _nstarts_with?: InputMaybe<Scalars['String']['input']>;
   _null?: InputMaybe<Scalars['Boolean']['input']>;
@@ -2048,11 +2086,11 @@ export type GetSideMenuQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetSideMenuQuery = { __typename?: 'Query', sidemenu?: { __typename?: 'sidemenu', items?: Array<{ __typename?: 'sidemenu_menulinks', menulinks_id?: { __typename?: 'menulinks', id: string, title?: string | null, url: string, status?: string | null, sort?: number | null } | null } | null> | null } | null };
 
 export type GetTagQueryVariables = Exact<{
-  id: Scalars['ID']['input'];
+  id: Scalars['String']['input'];
 }>;
 
 
-export type GetTagQuery = { __typename?: 'Query', tag?: { __typename?: 'tags', id: string, name: string, slug: string, status?: string | null, articles?: Array<{ __typename?: 'articles_tags', articles_id?: { __typename?: 'articles', id: string, title?: string | null, summary?: string | null, slug: string, cover_image?: { __typename?: 'directus_files', id: string, filename_disk?: string | null, filename_download: string, type?: string | null, description?: string | null, filesize?: any | null, folder?: { __typename?: 'directus_folders', name: string } | null } | null } | null } | null> | null } | null };
+export type GetTagQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'tags', id: string, name: string, slug: string, status?: string | null, articles?: Array<{ __typename?: 'articles_tags', articles_id?: { __typename?: 'articles', id: string, title?: string | null, summary?: string | null, slug: string, cover_image?: { __typename?: 'directus_files', id: string, filename_disk?: string | null, filename_download: string, type?: string | null, description?: string | null, filesize?: any | null, folder?: { __typename?: 'directus_folders', name: string } | null } | null } | null } | null> | null }> };
 
 export type GetTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2175,7 +2213,7 @@ export function useGetMainMenuLazyQuery(options: VueApolloComposable.UseQueryOpt
 export type GetMainMenuQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetMainMenuQuery, GetMainMenuQueryVariables>;
 export const GetPathDocument = gql`
     query GET_PATH($path: String!) {
-  articles(filter: {slug: {_eq: $path}}) {
+  articles(filter: {slug: {_eq: $path}, status: {_eq: "published"}}) {
     id
     title
     body
@@ -2187,7 +2225,7 @@ export const GetPathDocument = gql`
       }
     }
   }
-  tags(filter: {slug: {_eq: $path}}) {
+  tags(filter: {slug: {_eq: $path}, status: {_eq: "published"}}) {
     id
     name
     slug
@@ -2273,8 +2311,8 @@ export function useGetSideMenuLazyQuery(options: VueApolloComposable.UseQueryOpt
 }
 export type GetSideMenuQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetSideMenuQuery, GetSideMenuQueryVariables>;
 export const GetTagDocument = gql`
-    query GET_TAG($id: ID!) {
-  tag: tags_by_id(id: $id) {
+    query GET_TAG($id: String!) {
+  tags(filter: {id: {_eq: $id}, status: {_eq: "published"}}) {
     id
     name
     slug
@@ -2326,7 +2364,12 @@ export function useGetTagLazyQuery(variables: GetTagQueryVariables | VueComposit
 export type GetTagQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetTagQuery, GetTagQueryVariables>;
 export const GetTagsDocument = gql`
     query GET_TAGS {
-  tags(limit: 30, page: 1, sort: "-count(articles)") {
+  tags(
+    filter: {status: {_eq: "published"}}
+    limit: 30
+    page: 1
+    sort: "-count(articles)"
+  ) {
     id
     name
     slug

@@ -1,11 +1,11 @@
-query GET_TAG($id: ID!){
-    tag: tags_by_id(id: $id) {
+query GET_TAG($id: String!){
+    tags (filter: {id: {_eq: $id}, status: {_eq: "published"}}) {
         id
         name
         slug
         status
         articles {
-            articles_id {
+            articles_id(filter: {status: {_eq: "published"}}) {
                 id
                 title
                 cover_image {
