@@ -2102,7 +2102,7 @@ export const GetDownloadLinkDocument = gql`
     query GET_DOWNLOAD_LINK {
   downloadlink {
     id
-    menulink {
+    menulink(filter: {status: {_eq: "published"}}) {
       id
       title
       url
@@ -2136,7 +2136,7 @@ export const GetFrontpageDocument = gql`
   frontpage {
     id
     welcome_message
-    articles {
+    articles(filter: {status: {_eq: "published"}}) {
       id
       title
       cover_image {
@@ -2180,7 +2180,7 @@ export const GetMainMenuDocument = gql`
     query GET_MAIN_MENU {
   mainmenu {
     items {
-      menulinks_id {
+      menulinks_id(filter: {status: {_eq: "published"}}) {
         id
         title
         url
@@ -2231,7 +2231,7 @@ export const GetPathDocument = gql`
     slug
     status
     articles {
-      articles_id {
+      articles_id(filter: {status: {_eq: "published"}}) {
         id
         title
         cover_image {
@@ -2279,7 +2279,7 @@ export const GetSideMenuDocument = gql`
     query GET_SIDE_MENU {
   sidemenu {
     items {
-      menulinks_id {
+      menulinks_id(filter: {status: {_eq: "published"}}) {
         id
         title
         url
@@ -2318,7 +2318,7 @@ export const GetTagDocument = gql`
     slug
     status
     articles {
-      articles_id {
+      articles_id(filter: {status: {_eq: "published"}}) {
         id
         title
         cover_image {

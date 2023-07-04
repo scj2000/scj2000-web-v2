@@ -80,9 +80,6 @@ export default defineNuxtConfig({
             },
         ],
     ],
-    extends: [
-        'nuxt-seo-kit'
-    ],
     apollo: {
         authType: "Bearer",
         authHeader: "Authorization",

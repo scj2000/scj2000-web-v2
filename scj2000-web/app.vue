@@ -1,6 +1,5 @@
 <template>
   <div class="app">
-    <SeoKit />
     <div class="background-curtain">
       <video v-if="viewport.isGreaterThan('xs')" class="background-curtain" src="/videos/ink.mp4" autoplay loop muted></video>
     </div>
