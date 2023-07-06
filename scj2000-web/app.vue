@@ -28,7 +28,16 @@
 <script setup lang="ts">
   const viewport = useViewport()
 
-  const { API_TOKEN } = useRuntimeConfig();
+  const { apiToken, public: { siteName, siteDescription, ogImageUrl } } = useRuntimeConfig();
   const cookie = useCookie("api-token");
-  cookie.value = cookie.value || API_TOKEN;
+  cookie.value = cookie.value || apiToken;
+  useSeoMeta({
+    title: siteName,
+    titleTemplate: (title) => title == siteName? title : `${title} | ${siteName}`,
+    ogTitle: siteName,
+    description: siteDescription,
+    ogDescription: siteDescription,
+    ogImage: ogImageUrl,
+    twitterCard: 'summary_large_image',
+  })
 </script>

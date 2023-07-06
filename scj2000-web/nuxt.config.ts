@@ -14,13 +14,29 @@ export default defineNuxtConfig({
         ],
     },
     runtimeConfig: {
-        API_TOKEN: process.env.API_TOKEN,
+        apiToken: process.env.API_TOKEN,
         public: {
-            API_ENDPOINT: process.env.API_ENDPOINT,
+            apiEndpoint: process.env.API_ENDPOINT,
+            gtmId: process.env.GTM_ID,
             siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.scj2000.net',
+            cdnUrl: process.env.CDN_URL || 'https://cdn.scj2000.net',
             siteName: '快倉中文輸入法',
             siteDescription: '歡迎來到快倉中文輸入法網站！',
+            ogImageUrl: 'https://cdn.scj2000.net/assets/9d3740ce-5568-4d35-b1f8-5a114c9ad76d.png?key=ogimage',
             language: 'zh-HK',
+            gtm: {
+                id: process.env.GTM_ID,
+                queryParams: {},
+                defer: false,
+                compatibility: false,
+                enabled: true,
+                debug: false,
+                loadScript: true,
+                enableRouterSync: true,
+                ignoredViews: [],
+                trackOnNextTick: false,
+                devtools: false,
+            }
         }
     },
     app: {
@@ -53,6 +69,7 @@ export default defineNuxtConfig({
     modules: [
         '@nuxtjs/apollo',
         '@nuxtjs/tailwindcss',
+        '@zadigetvoltaire/nuxt-gtm',
         [
             '@nuxt/image', {
                 directus: {

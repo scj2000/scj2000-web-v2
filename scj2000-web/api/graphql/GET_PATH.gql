@@ -2,6 +2,18 @@ query GET_PATH($path: String!){
     articles (filter: {slug: {_eq: $path}, status: {_eq: "published"}}) {
         id
         title
+        summary
+        cover_image {
+            id
+            folder {
+                name
+            }
+            filename_disk
+            filename_download
+            type
+            description
+            filesize
+        }
         body
         tags {
             tags_id {
@@ -14,6 +26,18 @@ query GET_PATH($path: String!){
     tags (filter: {slug: {_eq: $path}, status: {_eq: "published"}}) {
         id
         name
+        summary
+        cover_image {
+            id
+            folder {
+                name
+            }
+            filename_disk
+            filename_download
+            type
+            description
+            filesize
+        }
         slug
         status
         articles {

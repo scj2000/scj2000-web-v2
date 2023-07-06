@@ -5,8 +5,10 @@
         "mainmenu",
         "menulink",
         "menulinks",
+        "noninteraction",
         "sidemenu",
         "TTYV",
-        "vuewordcloud"
+        "vuewordcloud",
+        "zadigetvoltaire"
     ]
 }

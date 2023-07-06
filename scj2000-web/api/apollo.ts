@@ -2078,7 +2078,7 @@ export type GetPathQueryVariables = Exact<{
 }>;
 
 
-export type GetPathQuery = { __typename?: 'Query', articles: Array<{ __typename?: 'articles', id: string, title?: string | null, body?: string | null, tags?: Array<{ __typename?: 'articles_tags', tags_id?: { __typename?: 'tags', id: string, name: string, slug: string } | null } | null> | null }>, tags: Array<{ __typename?: 'tags', id: string, name: string, slug: string, status?: string | null, articles?: Array<{ __typename?: 'articles_tags', articles_id?: { __typename?: 'articles', id: string, title?: string | null, summary?: string | null, slug: string, cover_image?: { __typename?: 'directus_files', id: string, filename_disk?: string | null, filename_download: string, type?: string | null, description?: string | null, filesize?: any | null, folder?: { __typename?: 'directus_folders', name: string } | null } | null } | null } | null> | null }> };
+export type GetPathQuery = { __typename?: 'Query', articles: Array<{ __typename?: 'articles', id: string, title?: string | null, summary?: string | null, body?: string | null, cover_image?: { __typename?: 'directus_files', id: string, filename_disk?: string | null, filename_download: string, type?: string | null, description?: string | null, filesize?: any | null, folder?: { __typename?: 'directus_folders', name: string } | null } | null, tags?: Array<{ __typename?: 'articles_tags', tags_id?: { __typename?: 'tags', id: string, name: string, slug: string } | null } | null> | null }>, tags: Array<{ __typename?: 'tags', id: string, name: string, summary?: string | null, slug: string, status?: string | null, cover_image?: { __typename?: 'directus_files', id: string, filename_disk?: string | null, filename_download: string, type?: string | null, description?: string | null, filesize?: any | null, folder?: { __typename?: 'directus_folders', name: string } | null } | null, articles?: Array<{ __typename?: 'articles_tags', articles_id?: { __typename?: 'articles', id: string, title?: string | null, summary?: string | null, slug: string, cover_image?: { __typename?: 'directus_files', id: string, filename_disk?: string | null, filename_download: string, type?: string | null, description?: string | null, filesize?: any | null, folder?: { __typename?: 'directus_folders', name: string } | null } | null } | null } | null> | null }> };
 
 export type GetSideMenuQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2216,6 +2216,18 @@ export const GetPathDocument = gql`
   articles(filter: {slug: {_eq: $path}, status: {_eq: "published"}}) {
     id
     title
+    summary
+    cover_image {
+      id
+      folder {
+        name
+      }
+      filename_disk
+      filename_download
+      type
+      description
+      filesize
+    }
     body
     tags {
       tags_id {
@@ -2228,6 +2240,18 @@ export const GetPathDocument = gql`
   tags(filter: {slug: {_eq: $path}, status: {_eq: "published"}}) {
     id
     name
+    summary
+    cover_image {
+      id
+      folder {
+        name
+      }
+      filename_disk
+      filename_download
+      type
+      description
+      filesize
+    }
     slug
     status
     articles {
