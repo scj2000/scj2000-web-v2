@@ -73,7 +73,7 @@ export default defineNuxtConfig({
         [
             '@nuxt/image', {
                 directus: {
-                    baseURL: process.env.ASSETS_BASEURL || "http://scj2000-cms:8055/assets/",
+                    baseURL: process.env.ASSETS_BASEURL || "https://cdn.scj2000.net/assets/",
                     modifiers: {},
                 }
             }
@@ -104,7 +104,7 @@ export default defineNuxtConfig({
         clients: {
             default: {
                 tokenName: "api-token",
-                httpEndpoint: process.env.API_ENDPOINT || "http://scj2000-cms:1337/graphql",
+                httpEndpoint: process.env.API_ENDPOINT || "https://cdn.scj2000.net/graphql",
             }
         }
     },
