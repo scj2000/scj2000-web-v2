@@ -8,8 +8,6 @@ name: Docker
 on:
   push:
     branches: [ "main" ]
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ "main" ]
 
@@ -32,7 +30,6 @@ jobs:
           with:
               github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
               image-name: ${{ env.IMAGE_NAME }} 
-              extract-git-tag: true
-              additional-image-tags: latest
+              image-tags: latest
               build-context: ./scj2000-web
               dockerfile: Dockerfile
