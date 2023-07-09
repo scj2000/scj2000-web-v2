@@ -44,4 +44,4 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           repository: scj2000/scj2000-web-cfpages
-          event-type: website-code-update
+          event-type: webhook
