@@ -33,6 +33,7 @@ jobs:
           dockerfile: Dockerfile
 
   trigger-dispatch-cfpages:
+    needs: build-and-publish-latest
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' # Running this job only for main branch      
     steps:
