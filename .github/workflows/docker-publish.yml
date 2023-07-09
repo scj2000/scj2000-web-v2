@@ -19,6 +19,7 @@ env:
 
 jobs:
   build-and-publish-latest:
+    name: "Build and publish Docker image"
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' # Running this job only for main branch
     steps:
@@ -33,6 +34,7 @@ jobs:
           dockerfile: Dockerfile
 
   trigger-dispatch-cfpages:
+    name: "Triger to generate static HTML site"
     needs: build-and-publish-latest
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' # Running this job only for main branch      
