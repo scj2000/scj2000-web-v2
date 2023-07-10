@@ -11,7 +11,7 @@ module.exports = {
     theme: {
       extend: {
         fontFamily: {
-          kai: ['FreeHKKai', 'TWKai', 'sans-serif'],
+          ming: ['Noto Serif TC', 'serif'],
         },
       },
     },

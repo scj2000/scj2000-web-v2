@@ -8,7 +8,7 @@
             :modifiers="{ key: 'cover' }"
             alt="" />
         <div class="flex flex-col max-h-48 overflow-hidden justify-start p-4 leading-normal">
-            <h5 class="mb-2 text-2xl font-kai font-bold tracking-tight text-red-500 hover:text-red-300">{{title}}</h5>
+            <h5 class="mb-2 text-2xl font-ming font-bold tracking-tight text-red-500 hover:text-red-300">{{title}}</h5>
             <p class="overflow-hidden font-normal text-gray-500 hover:text-gray-700 ">{{summary}}</p>
         </div>
     </NuxtLink>

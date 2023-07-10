@@ -3,7 +3,7 @@
         <nav class="flex items-center justify-between flex-wrap bg-gray-300 drop-shadow-lg mt-0 p-2 md:p-4">
             <div class="flex items-center flex-shrink-0 text-red-600 mr-6">
                 <AppLink to="/"><SvgInline name="scj2000" class="mr-2 text-red-600" /></AppLink>
-                <AppLink to="/"><span class="hidden sm:block font-kai text-red-600 text-2xl tracking-tight">快速倉頡中文輸入法</span></AppLink>
+                <AppLink to="/"><span class="hidden sm:block font-ming text-red-600 text-2xl tracking-tight">快速倉頡中文輸入法</span></AppLink>
             </div>
             <div class="block md:hidden">
                 <button @click="toggleMenu()" class="flex items-center px-3 py-2 border rounded text-red-400 border-red-400 hover:text-white hover:border-white">

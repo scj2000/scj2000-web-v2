@@ -1,7 +1,7 @@
 <template>
     <article>
         <AppLink :to="url">
-            <h3 class="text-xl font-bold text-red-500 hover:text-white font-kai mb-2">{{ name }}</h3>
+            <h3 class="text-xl font-bold text-red-500 hover:text-white font-ming mb-2">{{ name }}</h3>
         </AppLink>
         <div v-if="articles" class="text-sm">
             <AppLink

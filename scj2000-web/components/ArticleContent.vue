@@ -1,6 +1,6 @@
 <template>
     <article>
-        <h1 class="text-3xl font-bold text-red-500 font-kai mb-2">{{ title }}</h1>
+        <h1 class="text-3xl font-bold text-red-500 font-ming mb-2">{{ title }}</h1>
         <div v-html="body" />
     </article>
 </template>

@@ -2,20 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: FreeHKKai;
-    src: url(/fonts/Free-HK-Kai_4700-v1.02.woff2) format("woff2");
-    unicode-range: U+4e00-9fff;
-    font-display: swap; 
-}
-
-@font-face {
-    font-family: TWKai;
-    src: url(/fonts/TW-Kai-98_1.woff2) format("woff2");
-    unicode-range: U+4e00-9fff;
-    font-display: swap;
-}
-
 body {
     margin: 0;
     padding: 0;

@@ -43,22 +43,26 @@ export default defineNuxtConfig({
         head: {
           charset: 'utf-8',
           link: [
+            // Google Noto Serif TC font
             {
-                rel: 'preload',
-                href: '/fonts/Free-HK-Kai_4700-v1.02.woff2',
-                as: 'font',
-                type: 'font/woff2',
+                rel: 'preconnect',
+                href: 'https://fonts.googleapis.com',
                 media: 'print',
                 onload: 'this.media=\'all\'',
             },
             {
-                rel: 'preload',
-                href: '/fonts/TW-Kai-98_1.woff2',
-                as: 'font',
-                type: 'font/woff2',
+                rel: 'preconnect',
+                href: 'https://fonts.gstatic.com',
+                crossorigin: '',
                 media: 'print',
                 onload: 'this.media=\'all\'',
-            },     
+            },
+            {
+                rel: 'stylesheet',
+                href: 'https://fonts.googleapis.com/css2?family=Noto+Serif+TC:400&display=swap',
+                media: 'print',
+                onload: 'this.media=\'all\'',
+            }, 
           ],
         }
     },

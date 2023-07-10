@@ -1,6 +1,6 @@
 <template>
     <article>
-        <h1 class="text-3xl font-bold text-red-500 font-kai mb-2">{{ name }}</h1>
+        <h1 class="text-3xl font-bold text-red-500 font-ming mb-2">{{ name }}</h1>
         <div class="grid grid-cols-1 gap-2 md:grid-cols-2 text-sm">
             <ArticleCard
                 v-for="item in articles"
