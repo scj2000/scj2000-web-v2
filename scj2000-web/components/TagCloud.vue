@@ -5,7 +5,7 @@
             :words="tagCloudItems"
             :rotation="(n:number) => itemRotationTurn(n)"
             :color="(n:number) => itemColor(n)"
-            font-family="FreeHKKai"
+            font-family="Noto Serif TC"
             :font-size-ratio="3"
             :spacing="0.1"
         >
