@@ -59,7 +59,7 @@ export default defineNuxtConfig({
             },
             {
                 rel: 'stylesheet',
-                href: 'https://fonts.googleapis.com/css2?family=Noto+Serif+TC:400&display=swap',
+                href: 'https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap',
                 media: 'print',
                 onload: 'this.media=\'all\'',
             }, 
