@@ -75,3 +75,6 @@ main {
 footer {
     z-index: 9;
 }
+
+article ul { @apply list-disc list-inside pl-5 }
+article ol { @apply list-decimal list-inside pl-5 }

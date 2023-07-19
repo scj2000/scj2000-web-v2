@@ -1,6 +1,5 @@
 <template>
     <div class="grid grid-cols-12 gap-2">
-        <OgImage :data="coverImage" />
         <div class="hidden lg:col-span-3 2xl:col-span-2 lg:block mx-2 lg:mr-0 bg-gray-500 shadow-lg h-full">
             <section class="p-2">
                 <SideMenu />
@@ -42,6 +41,7 @@
     const tags =computed(() => data.value?.articles?.[0]?.tags?.map((item) => item?.tags_id) as Array<Tags>)
     const tag = computed(() => data.value?.tags?.[0] as Tags)
     const coverImage = computed(() => article?.value ? article?.value?.cover_image : tag?.value ? tag?.value?.cover_image : null)
+    const ogImage = useOgImage(coverImage.value)
 
     const pageTitle = article.value ? article.value.title : tag.value ? tag.value.name : siteName
     const pageDescription = article.value ? article.value.summary : tag.value ? tag.value.summary : siteDescription
@@ -51,6 +51,6 @@
         ogTitle: pageTitle,
         description: pageDescription,
         ogDescription: pageDescription,
-        ogImage: ogImageUrl,
+        ogImage: ogImage,
     })
 </script>
